@@ -3,8 +3,8 @@ import { History } from 'history';
 import { Route } from 'react-router';
 import { Redirect } from 'react-router-dom';
 
-import AuthContainer from './containers/AuthContainer/AuthContainer';
-import HomeContainer from './containers/HomeContainer/HomeContainer';
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
 
 export default (history: History<any>) => {
   return (
@@ -12,10 +12,8 @@ export default (history: History<any>) => {
       <Route path="/" exact>
         <Redirect to="/auth" />
       </Route>
-      <Route path="/auth" exact component={AuthContainer} />
-      <Route path="/home" exact component={HomeContainer} />
+      <Route path="/auth" exact component={Login} />
+      <Route path="/home" exact component={Home} />
     </Route>
   );
 };
-
-

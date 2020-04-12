@@ -26,3 +26,4 @@ CREATE TABLE IF NOT EXISTS plant_zones (
   zone varchar(50) NOT NULL,
   t_range varchar(50) NOT NULL
 );
+

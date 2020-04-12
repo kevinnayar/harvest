@@ -4,6 +4,9 @@
 - React
 - Redux
 - Thunk
+- Node
+- Express
+- Postgres
 - Typescript
 - React Router
 - Jest

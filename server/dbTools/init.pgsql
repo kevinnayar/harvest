@@ -1,7 +1,7 @@
 -- Drops tables
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS plants;
-DROP TABLE IF EXISTS plant_zones;
+-- DROP TABLE IF EXISTS plant_zones;
 
 -- Creates tables
 CREATE TABLE IF NOT EXISTS users (

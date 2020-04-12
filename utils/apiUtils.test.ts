@@ -1,6 +1,6 @@
-import { apiErrorToString } from './reduxUtils';
+import { apiErrorToString } from './apiUtils';
 
-describe('/src/utils/reduxUtils', () => {
+describe('apiUtils.test.ts', () => {
   test('apiErrorToString', () => {
     const errorStr: string = 'error';
     const errorObj: { message: string } = { message: errorStr };

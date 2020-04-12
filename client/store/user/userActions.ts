@@ -9,7 +9,7 @@ import {
   USER_AUTH_LOGOUT_SUCCEEDED,
   USER_AUTH_LOGOUT_FAILED,
   TypeUserLogoutDispatch,
-} from '../../types/userTypes';
+} from '../../../types/userTypes';
 
 export function userAuthLogin(userCredentials: TypeUserCredentials) {
   return async (dispatch: (action: TypeUserLoginDispatch) => void) => {

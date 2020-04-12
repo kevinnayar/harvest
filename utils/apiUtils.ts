@@ -1,13 +1,13 @@
-import { TypeUserEntity } from '../types/userTypes';
-import { TypePlantEntity } from '../types/plantTypes';
-import { TypeEntityTypes, TypeEntity } from '../types/baseTypes';
+import {
+  TypeUserEntity,
+  TypePlantEntity,
+  TypePlantZoneEntity,
+  TypeEntityType,
+  TypeEntity,
+} from '../types/entityTypes';
 
 export function apiErrorToString(error: string | { message: string }): string {
-  if (typeof error === 'object' && error.message && typeof error.message === 'string') {
-    return error.message;
-  }
-  // @ts-ignore: implicitly a string
-  return error;
+  return typeof error === 'string' ? error : error.message;
 }
 
 export function stringOrThrow(value: any, message: string): string {
@@ -17,6 +17,11 @@ export function stringOrThrow(value: any, message: string): string {
 
 export function strictStringOrThrow(value: any, message: string): string {
   if (typeof value === 'string' && value !== '') return value;
+  throw new Error(message);
+}
+
+export function predicateOrThrow<T>(predicateFunc: (value: T) => boolean, value: T, message: string): T {
+  if (predicateFunc(value)) return value;
   throw new Error(message);
 }
 
@@ -50,12 +55,29 @@ function convertPlantSqlToEntity(entity: any): TypePlantEntity {
   }
 }
 
-export function convertSqlToEntity(entityType: TypeEntityTypes, entity: any): TypeEntity {
+function convertPlantZoneSqlEntity(entity: any): TypePlantZoneEntity {
+  try {
+    const { id, zipcode, zone } = entity;
+    return {
+      type: 'TypePlantZoneEntity',
+      id,
+      zipcode,
+      zone,
+      tRange: entity.t_range,
+    };
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+export function convertSqlToEntity(entityType: TypeEntityType, entity: any): TypeEntity {
   switch (entityType) {
     case 'TypeUserEntity':
       return convertUserSqlToEntity(entity);
     case 'TypePlantEntity':
       return convertPlantSqlToEntity(entity);
+    case 'TypePlantZoneEntity':
+      return convertPlantZoneSqlEntity(entity);
     default:
       throw new Error(`convertSqlToEntity: unexpected entity type: ${entityType}`);
   }

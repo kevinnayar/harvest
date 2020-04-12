@@ -1,9 +1,11 @@
 import * as dotenv from 'dotenv';
 import * as express from 'express';
+import * as cors from 'cors';
 import * as api from './api/api';
+
 import { InternalServerErrorException } from '../utils/exceptionUtils';
 import { apiErrorToString } from '../utils/apiUtils';
-import { TypeDBConfig } from './api/api';
+import { TypeDBConfig } from '../types/baseTypes';
 
 dotenv.config();
 
@@ -46,6 +48,14 @@ function main() {
   const dbConfig = validDBConfig();
 
   const app = express();
+
+  const corsOptions = {
+    origin: apiHost,
+    methods: 'GET',
+    optionsSuccessStatus: 200,
+  };
+
+  app.use(cors(corsOptions));
 
   api.register(app, dbConfig);
 

@@ -20,7 +20,7 @@ const Login = () => {
   return (
     <div>
       <h1>Welcome!</h1>
-      <button onClick={e => onLogin(credentials)}>Login</button>
+      <button onClick={(e) => onLogin(credentials)}>Login</button>
     </div>
   );
 };

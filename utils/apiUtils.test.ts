@@ -1,12 +1,97 @@
-import { apiErrorToString } from './apiUtils';
+import {
+  apiErrorToString,
+  stringOrThrow,
+  strictStringOrThrow,
+  predicateOrThrow,
+  convertSqlToEntity,
+} from './apiUtils';
+import { TypeUserEntity, TypePlantEntity } from '../types/entityTypes';
 
 describe('apiUtils.test.ts', () => {
-  test('apiErrorToString', () => {
-    const errorStr: string = 'error';
-    const errorObj: { message: string } = { message: errorStr };
+  const err: string = 'error';
+  const errObj: { message: string } = { message: err };
 
-    expect(apiErrorToString(errorStr)).toEqual(errorStr);
-    expect(apiErrorToString(errorObj)).toEqual(errorStr);
+  test('apiErrorToString', () => {
+    expect(apiErrorToString(err)).toEqual(err);
+    expect(apiErrorToString(errObj)).toEqual(err);
+  });
+
+  test('stringOrThrow', () => {
+    expect(stringOrThrow('a', err)).toEqual('a');
+    expect(stringOrThrow('', err)).toEqual('');
+    expect(() => stringOrThrow(1, err)).toThrow(err);
+  });
+
+  test('strictStringOrThrow', () => {
+    expect(strictStringOrThrow('a', err)).toEqual('a');
+    expect(() => strictStringOrThrow('', err)).toThrow(err);
+    expect(() => strictStringOrThrow(1, err)).toThrow(err);
+  });
+
+  test('predicateOrThrow', () => {
+    const isThreeLetters = (value: string) => value.length === 3;
+    expect(predicateOrThrow(isThreeLetters, 'foo', err)).toEqual('foo');
+    expect(predicateOrThrow(isThreeLetters, 'bar', err)).toEqual('bar');
+    expect(() => predicateOrThrow(isThreeLetters, 'fo', err)).toThrow(err);
+    expect(() => predicateOrThrow(isThreeLetters, 'fooo', err)).toThrow(err);
+
+    const isZipcode = (value: number) => typeof value === 'number' && !Number.isNaN(value) && value.toString().length === 5;
+    expect(predicateOrThrow(isZipcode, 78745, err)).toEqual(78745);
+    expect(predicateOrThrow(isZipcode, 90210, err)).toEqual(90210);
+    expect(() => predicateOrThrow(isZipcode, 1, err)).toThrow(err);
+    expect(() => predicateOrThrow(isZipcode, 111111, err)).toThrow(err);
+  });
+
+  test('convertSqlToEntity', () => {
+    const userBase = {
+      id: 'user_1',
+      user_name: 'jon',
+    };
+    const userFull = {
+      ...userBase,
+      image_url: 'image',
+      date_created: 1,
+    };
+    const userResultBase: TypeUserEntity = {
+      type: 'TypeUserEntity',
+      id: 'user_1',
+      userName: 'jon',
+      imageUrl: undefined,
+      dateCreated: undefined,
+    }
+    const plantBase = {
+      id: 'plant_1',
+      user_id: 'user_1',
+      plant_name: 'yarrow',
+    };
+    const plantFull = {
+      ...plantBase,
+      image_url: 'image',
+      dob: 1,
+      date_created: 1,
+    };
+    const plantResultBase: TypePlantEntity = {
+      type: 'TypePlantEntity',
+      id: 'plant_1',
+      userId: 'user_1',
+      plantName: 'yarrow',
+      imageUrl: undefined,
+      dob: undefined,
+      dateCreated: undefined,
+    }
+
+    expect(convertSqlToEntity('TypeUserEntity', userBase)).toEqual(userResultBase);
+    expect(convertSqlToEntity('TypeUserEntity', userFull)).toEqual({
+      ...userResultBase,
+      imageUrl: 'image',
+      dateCreated: 1,
+    });
+    expect(convertSqlToEntity('TypePlantEntity', plantBase)).toEqual(plantResultBase);
+    expect(convertSqlToEntity('TypePlantEntity', plantFull)).toEqual({
+      ...plantResultBase,
+      imageUrl: 'image',
+      dob: 1,
+      dateCreated: 1,
+    });
   });
 });
-

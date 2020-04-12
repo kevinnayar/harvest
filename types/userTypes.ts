@@ -46,14 +46,6 @@ export type TypeUserCredentials = {
   password: string;
 };
 
-export type TypeUserEntity = {
-  type: 'TypeUserEntity';
-  id: string;
-  userName: string;
-  imageUrl?: string;
-  dateCreated?: number;
-};
-
 
 
 

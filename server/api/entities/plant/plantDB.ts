@@ -13,3 +13,17 @@ export async function dbGetPlantById(db: IDatabase<{}, any>, plantId: string): P
     { plantId },
   );
 }
+
+export async function dbGetPlantZoneByZipcode(db: IDatabase<{}, any>, zipcode: string): Promise<Object[]> {
+  return db.any(
+    `
+    SELECT
+      *
+    FROM
+      plant_zones
+    WHERE
+      zipcode = $[zipcode]
+    `,
+    { zipcode },
+  );
+}

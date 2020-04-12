@@ -1,4 +1,4 @@
-import { apiXferInit, apiXferRequested, apiXferSucceeded, apiXferFailed } from '../../utils/reduxUtils';
+import { apiXferInit, apiXferRequested, apiXferSucceeded, apiXferFailed } from '../../../utils/reduxUtils';
 import {
   USER_AUTH_LOGIN_REQUESTED,
   USER_AUTH_LOGIN_SUCCEEDED,
@@ -9,7 +9,7 @@ import {
   TypeUserState,
   TypeUserReducer,
   TypeUserDispatch,
-} from '../../types/userTypes';
+} from '../../../types/userTypes';
 
 const unAuthedUserState: TypeUserState = {
   userGuid: null,

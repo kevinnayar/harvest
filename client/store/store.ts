@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose, Store } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import { TypeAppReducer, TypeAppDispatch } from '../types/baseTypes';
+import { TypeAppReducer, TypeAppDispatch } from '../../types/baseTypes';
 
 const middleware = [
   applyMiddleware(thunk),

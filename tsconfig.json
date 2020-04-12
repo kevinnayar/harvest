@@ -2,13 +2,19 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
-    "strict": true,
     "jsx": "react",
-    "rootDir": "./src",
     "incremental": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "lib": ["dom", "es2015"]
-  }
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["dom", "es2015"],
+    "baseUrl": "./",
+    "outDir": "dist",
+  },
+  "include": [
+    "**.ts"
+  ],
+  "exclude": [
+    "./node_modules"
+  ]
 }

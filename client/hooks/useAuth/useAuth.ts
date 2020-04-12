@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { userAuthLogin, userAuthLogout } from '../../store/user/userActions';
-import { TypeAppReducer } from '../../types/baseTypes';
-import { TypeUserCredentials, TypeUserState } from '../../types/userTypes';
+import { TypeAppReducer } from '../../../types/baseTypes';
+import { TypeUserCredentials, TypeUserState } from '../../../types/userTypes';
 
 function useAuth() {
   const dispatch = useDispatch();

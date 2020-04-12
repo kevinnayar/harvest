@@ -24,3 +24,7 @@ The USDA Plant Hardiness Zone Map (PHZM) is the standard by which gardeners and 
 
 * [Data](http://prism.oregonstate.edu/projects/plant_hardiness_zones.php)
 * [Maps](https://planthardiness.ars.usda.gov/PHZMWeb/Default.aspx)
+
+
+
+

@@ -9,10 +9,11 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["dom", "es2015"],
     "baseUrl": "./",
-    "outDir": "dist",
+    "outDir": "dist"
   },
   "include": [
-    "**.ts"
+    "**.ts",
+    "**/*.test.ts"
   ],
   "exclude": [
     "./node_modules"

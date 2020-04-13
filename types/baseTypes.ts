@@ -1,5 +1,4 @@
-import { TypeUserReducer, TypeUserDispatch, TypeUserEntity } from './userTypes';
-import { TypePlantEntity } from './plantTypes';
+import { TypeUserReducer, TypeUserDispatch } from './userTypes';
 
 export type TypeApiXferStatus = {
   requested: boolean;
@@ -19,6 +18,9 @@ export type TypeAppReducer = {
 
 export type TypeAppDispatch = TypeUserDispatch;
 
-export type TypeEntityTypes = 'TypeUserEntity' | 'TypePlantEntity';
-
-export type TypeEntity = TypeUserEntity | TypePlantEntity;
+export type TypeDBConfig = {
+  database: string;
+  host: string;
+  port: number;
+  user: string;
+};

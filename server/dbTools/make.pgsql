@@ -6,7 +6,7 @@ VALUES
 
 INSERT INTO plants (id, user_id, plant_name)
 VALUES 
-  ('plant_1', 'user_12345', 'Jpeg'),
-  ('plant_2', 'user_12345', 'Fluffy'),
-  ('plant_3', 'user_67890', 'Rover')
+  ('plant_1', 'user_12345', 'Cilantro'),
+  ('plant_2', 'user_12345', 'Arugula'),
+  ('plant_3', 'user_67890', 'Carrots')
 ;

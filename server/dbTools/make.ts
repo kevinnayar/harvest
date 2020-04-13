@@ -2,7 +2,25 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs-extra';
 import { Client } from 'pg';
 
-async function make(): Promise<void> {
+async function rebuildPlantZonesTable(pgClient: Client): Promise<void> {
+  const file = await fs.readFile('./data/phzm.json', { encoding: 'UTF-8' });
+  const json = JSON.parse(file);
+  const zipcodes = Object.keys(json);
+
+  for (const zipcode of zipcodes) {
+    const item = json[zipcode];
+    const query = `
+      INSERT INTO 
+        plant_zones (id, zipcode, zone, t_range)
+      VALUES
+        ('${item.zipcode}', '${item.zipcode}', '${item.zone}', '${item.tRange}');
+    `;
+    console.log(query);
+    await pgClient.query(query);
+  }
+}
+
+async function make(rebuild?: string): Promise<void> {
   dotenv.config();
   const pgClient: Client = new Client();
 
@@ -17,20 +35,10 @@ async function make(): Promise<void> {
         await pgClient.query(statement);
       }
     }
-
-    // const file = await fs.readFile('./data/phzm.json', { encoding: 'UTF-8' });
-    // const json = JSON.parse(file);
-    // const zipcodes = Object.keys(json);
-    // for (const zipcode of zipcodes) {
-    //   const item = json[zipcode];
-    //   const query = `
-    //     INSERT INTO 
-    //       plant_zones (id, zipcode, zone, t_range)
-    //     VALUES
-    //       ('${item.zipcode}', '${item.zipcode}', '${item.zone}', '${item.tRange}');
-    //   `;
-    //   await pgClient.query(query);
-    // }
+    
+    if (Boolean(rebuild)) {
+      await rebuildPlantZonesTable(pgClient);
+    }
   } catch (err) {
     console.log(err);
     throw err;
@@ -39,6 +47,6 @@ async function make(): Promise<void> {
   }
 }
 
-make()
+make(process.env.REBUILD)
   .then(() => console.log('DB MAKE: finished'))
   .catch((err) => console.log(`DB MAKE: finished with errors: ${err}`));

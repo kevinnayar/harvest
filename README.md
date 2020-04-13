@@ -1,5 +1,13 @@
 # 🌱 Harvest
 
+### Getting Started
+```
+git clone https://github.com/kevinnayar/harvest.git
+cd harvest
+npm install
+./tmux-dev.sh
+```
+
 ### Stack
 - React
 - Redux

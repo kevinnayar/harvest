@@ -27,3 +27,6 @@ export const MethodNotAllowedException = (message: string) =>
 
 export const InternalServerErrorException = (message: string) =>
   new HttpException(500, 'Internal Server Error', message);
+
+
+

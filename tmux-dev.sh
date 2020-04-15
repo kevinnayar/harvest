@@ -1,10 +1,6 @@
 #!/bin/bash
-source ./.tmux-dev
 
 session="harvest"
-
-# create .env if missing
-# [[ -f .env ]] || cp sample.env .env
 
 tmux start-server
 

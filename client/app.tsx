@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Router } from 'react-router';
 import { createBrowserHistory, History } from 'history';
 import { Provider } from 'react-redux';
+
+import config from './config';
 import store from './store/store';
 import routes from './routes';
 
@@ -13,16 +15,16 @@ function DevModeBanner() {
     height: 50,
     lineHeight: '50px',
     width: 200,
-    background: '#ff6103',
+    background: '#353434',
     color: 'white',
     textAlign: 'center',
     fontFamily: `"Courier New", Courier, monospace`,
     fontWeight: 'bold',
     textTransform: 'uppercase',
     zIndex: 1,
-    borderRadius: 25,
+    borderRadius: 4,
   };
-  return <div style={styles}>&#9733; dev mode &#9733;</div>;
+  return <div style={styles}>🔥 dev mode 🔥</div>;
 }
 
 const history: History<any> = createBrowserHistory();
@@ -32,7 +34,7 @@ export default function App() {
     <Provider store={store}>
       <Router history={history}>
         {routes(history)}
-        {process.env.NODE_ENV === 'development' && <DevModeBanner />}
+        {config.isDevMode && <DevModeBanner />}
       </Router>
     </Provider>
   );

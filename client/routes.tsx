@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
+import ZipcodeTest from './components/ZipcodeTest/ZipcodeTest';
 
 export default (history: History<any>) => {
   return (
@@ -14,6 +15,7 @@ export default (history: History<any>) => {
       </Route>
       <Route path="/auth" exact component={Login} />
       <Route path="/home" exact component={Home} />
+      <Route path="/zipcode" exact component={ZipcodeTest} />
     </Route>
   );
 };

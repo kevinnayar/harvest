@@ -3,37 +3,16 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as api from './api/api';
 
-import { InternalServerErrorException } from '../utils/exceptionUtils';
-import { apiErrorToString } from '../utils/apiUtils';
+import { apiErrorToString, strictStringOrThrow, numberOrThrow } from '../utils/apiUtils';
 import { TypeDBConfig } from '../types/baseTypes';
 
 dotenv.config();
 
-function validApiPort(): string {
-  const apiPort = process.env.API_PUBLIC_PORT;
-  if (apiPort === undefined) throw InternalServerErrorException('No PORT env variable');
-  return apiPort;
-}
-
-function validApiHost(): string {
-  const apiHost = process.env.API_HOST;
-  if (apiHost === undefined) throw InternalServerErrorException('No HOST env variable');
-  return apiHost;
-}
-
 function validDBConfig(): TypeDBConfig {
-  const database = process.env.PGDATABASE;
-  if (database === undefined) throw InternalServerErrorException('No DATABASE config env variable');
-
-  const host = process.env.PGHOST;
-  if (host === undefined) throw InternalServerErrorException('No DATABASE HOST config env variable');
-
-  const port = parseInt(process.env.PGPORT || '5432', 10);
-  if (port === undefined) throw InternalServerErrorException('No DATABASE PORT config env variable');
-
-  const user = process.env.PGUSER;
-  if (user === undefined) throw InternalServerErrorException('No DATABASE USER config env variable');
-
+  const database = strictStringOrThrow(process.env.PGDATABASE, 'No DATABASE config env variable');
+  const host = strictStringOrThrow(process.env.PGHOST, 'No DATABASE HOST config env variable');
+  const port = numberOrThrow(parseInt(process.env.PGPORT || '5432', 10), 'No DATABASE PORT config env variable');
+  const user = strictStringOrThrow(process.env.PGUSER, 'No DATABASE USER config env variable');
   return {
     database,
     host,
@@ -43,33 +22,40 @@ function validDBConfig(): TypeDBConfig {
 }
 
 function main() {
-  const apiPort = validApiPort();
-  const apiHost = validApiHost();
-  const dbConfig = validDBConfig();
+  try {
+    const apiProtocol = strictStringOrThrow(process.env.API_PROTOCOL, 'No API PROTOCOL env variable');
+    const apiHost = strictStringOrThrow(process.env.API_HOST, 'No API HOST env variable');
+    const apiPort = strictStringOrThrow(process.env.API_PORT, 'No API PORT env variable');
+    const apiUrl = `${apiProtocol}://${apiHost}:${apiPort}`;
 
-  const app = express();
+    const appProtocol = strictStringOrThrow(process.env.APP_PROTOCOL, 'No APP PROTOCOL env variable');
+    const appHost = strictStringOrThrow(process.env.APP_HOST, 'No APP HOST env variable');
+    const appPort = strictStringOrThrow(process.env.APP_PORT, 'No APP PORT env variable');
+    const appUrl = `${appProtocol}://${appHost}:${appPort}`;
 
-  const corsOptions = {
-    origin: apiHost,
-    methods: 'GET',
-    optionsSuccessStatus: 200,
-  };
+    const app = express();
 
-  app.use(cors(corsOptions));
+    const corsOptions = {
+      origin: appUrl,
+      optionsSuccessStatus: 200,
+    };
 
-  api.register(app, dbConfig);
+    app.use(cors(corsOptions));
 
-  const server = app.listen(apiPort, (err) => {
-    if (err) throw InternalServerErrorException(`Error starting server: ${apiErrorToString(err)}`);
+    const dbConfig = validDBConfig();
 
-    console.info('\n');
-    console.info(`  🌎   API is running on port ${apiPort}\n`);
-    console.info(`  💻   Send request to http://${apiHost}:${apiPort}\n`);
-    console.info('\n');
-  });
+    api.register(app, dbConfig);
 
-  server.keepAliveTimeout = 0;
-  server.timeout = 60 * 60 * 1000;
+    const server = app.listen(apiPort, (err) => {
+      if (err) throw new Error(`Error starting server: ${apiErrorToString(err)}`);
+      console.info(`\n  🌎   API is running at ${apiUrl}\n`);
+    });
+
+    server.keepAliveTimeout = 0;
+    server.timeout = 60 * 60 * 1000;
+  } catch (err) {
+    throw new Error(`\n  💀   ERROR: ${apiErrorToString(err)}\n`);
+  }
 }
 
 main();

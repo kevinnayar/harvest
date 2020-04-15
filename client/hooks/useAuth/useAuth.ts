@@ -19,10 +19,10 @@ function useAuth() {
 
   return {
     userState,
-    onLogin: handleLogin,
-    onLogout: handleLogout,
     isAuthenticated,
     redirectPath: '/home',
+    onLogin: handleLogin,
+    onLogout: handleLogout,
   };
 }
 

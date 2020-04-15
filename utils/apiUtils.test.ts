@@ -2,6 +2,7 @@ import {
   apiErrorToString,
   stringOrThrow,
   strictStringOrThrow,
+  numberOrThrow,
   predicateOrThrow,
   convertSqlToEntity,
 } from './apiUtils';
@@ -26,6 +27,17 @@ describe('apiUtils.test.ts', () => {
     expect(strictStringOrThrow('a', err)).toEqual('a');
     expect(() => strictStringOrThrow('', err)).toThrow(err);
     expect(() => strictStringOrThrow(1, err)).toThrow(err);
+  });
+
+  test('numberOrThrow', () => {
+    expect(numberOrThrow(0, err)).toEqual(0);
+    expect(numberOrThrow(1, err)).toEqual(1);
+    expect(numberOrThrow(9007199254740991, err)).toEqual(9007199254740991);
+    expect(() => numberOrThrow(9007199254740992, err)).toThrow(err);
+    expect(() => numberOrThrow('foo', err)).toThrow(err);
+    expect(() => numberOrThrow(undefined, err)).toThrow(err);
+    expect(() => numberOrThrow({}, err)).toThrow(err);
+    expect(() => numberOrThrow([], err)).toThrow(err);
   });
 
   test('predicateOrThrow', () => {

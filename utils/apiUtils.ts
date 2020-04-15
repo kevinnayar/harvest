@@ -20,6 +20,11 @@ export function strictStringOrThrow(value: any, message: string): string {
   throw new Error(message);
 }
 
+export function numberOrThrow(value: any, message: string): number {
+  if (typeof value === 'number' && !Number.isNaN(value) && value <= Number.MAX_SAFE_INTEGER) return value;
+  throw new Error(message);
+}
+
 export function predicateOrThrow<T>(predicateFunc: (value: T) => boolean, value: T, message: string): T {
   if (predicateFunc(value)) return value;
   throw new Error(message);

@@ -3,7 +3,7 @@ import { IDatabase } from 'pg-promise';
 
 import { dbGetPlantById, dbGetPlantZoneByZipcode } from './plantDB';
 import { apiErrorToString, strictStringOrThrow, predicateOrThrow, convertSqlToEntity } from '../../../../utils/apiUtils';
-import { NotFoundException } from '../../../../utils/exceptionUtils';
+import { NotFoundException, BadRequestException } from '../../../../utils/exceptionUtils';
 
 export default class PlantQueries {
   db: IDatabase<{}, any>;
@@ -25,7 +25,7 @@ export default class PlantQueries {
           .status(404)
           .json(NotFoundException('Could not find plant.'));
     } catch (err) {
-      return res.status(404).json(NotFoundException(apiErrorToString(err)));
+      return res.status(404).json(BadRequestException(apiErrorToString(err)));
     }
   };
 
@@ -43,7 +43,7 @@ export default class PlantQueries {
           .status(404)
           .json(NotFoundException(`Could not find plant zone for zipcode: ${zipcode}.`));
     } catch (err) {
-      return res.status(404).json(NotFoundException(apiErrorToString(err)));
+      return res.status(404).json(BadRequestException(apiErrorToString(err)));
     }
   };
 }

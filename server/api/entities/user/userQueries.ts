@@ -3,7 +3,7 @@ import { IDatabase } from 'pg-promise';
 
 import { dbGetUserById, dbGetPlantsByUserId } from './userDB';
 import { apiErrorToString, strictStringOrThrow, convertSqlToEntity } from '../../../../utils/apiUtils';
-import { NotFoundException } from '../../../../utils/exceptionUtils';
+import { NotFoundException, BadRequestException } from '../../../../utils/exceptionUtils';
 
 export default class UserQueries {
   db: IDatabase<{}, any>;
@@ -25,7 +25,7 @@ export default class UserQueries {
           .status(404)
           .json(NotFoundException('Could not find user.'));
     } catch (err) {
-      return res.status(404).json(NotFoundException(apiErrorToString(err)));
+      return res.status(404).json(BadRequestException(apiErrorToString(err)));
     }
   };
 
@@ -42,7 +42,7 @@ export default class UserQueries {
           .status(404)
           .json(NotFoundException('No plants found for this user.'));
     } catch (err) {
-      return res.status(404).json(NotFoundException(apiErrorToString(err)));
+      return res.status(404).json(BadRequestException(apiErrorToString(err)));
     }
   };
 }

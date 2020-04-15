@@ -31,7 +31,7 @@ Going forward, if you have [tmux](https://linuxize.com/post/getting-started-with
 ./tmux-dev.sh
 ```
 
-Othwerwise, just run the `client` and the `server`
+Otherwise, just run the `client` and the `server`
 
 
 

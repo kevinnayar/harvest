@@ -1,32 +1,19 @@
-export class HttpException {
-  status: number;
-  name: string;
-  message: string;
+import { TypeHttpException } from '../types/baseTypes';
 
-  constructor(status: number, name: string, message: string) {
-    this.status = status;
-    this.name = name;
-    this.message = message;
-  }
-};
+export const BadRequestException = (message: string): TypeHttpException =>
+  ({ status: 400, statusText: 'Bad Request', message });
 
-export const BadRequestException = (message: string) =>
-  new HttpException(400, 'Bad Request', message);
+export const UnauthorizedException = (message: string): TypeHttpException =>
+  ({ status: 401, statusText: 'Unauthorized', message });
 
-export const UnauthorizedException = (message: string) =>
-  new HttpException(401, 'Unauthorized', message);
+export const ForbiddenException = (message: string): TypeHttpException =>
+  ({ status: 403, statusText: 'Forbidden', message });
 
-export const ForbiddenException = (message: string) =>
-  new HttpException(403, 'Forbidden', message);
+export const NotFoundException = (message: string): TypeHttpException =>
+  ({ status: 404, statusText: 'Not Found', message });
 
-export const NotFoundException = (message: string) =>
-  new HttpException(404, 'Not Found', message);
+export const MethodNotAllowedException = (message: string): TypeHttpException =>
+  ({ status: 405, statusText: 'Method Not Allowed', message });
 
-export const MethodNotAllowedException = (message: string) =>
-  new HttpException(405, 'Method Not Allowed', message);
-
-export const InternalServerErrorException = (message: string) =>
-  new HttpException(500, 'Internal Server Error', message);
-
-
-
+export const InternalServerErrorException = (message: string): TypeHttpException =>
+  ({ status: 500, statusText: 'Internal Server Error', message });

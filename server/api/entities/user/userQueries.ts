@@ -25,7 +25,7 @@ export default class UserQueries {
           .status(404)
           .json(NotFoundException('Could not find user.'));
     } catch (err) {
-      return res.status(404).json(BadRequestException(apiErrorToString(err)));
+      return res.status(400).json(BadRequestException(apiErrorToString(err)));
     }
   };
 
@@ -42,7 +42,7 @@ export default class UserQueries {
           .status(404)
           .json(NotFoundException('No plants found for this user.'));
     } catch (err) {
-      return res.status(404).json(BadRequestException(apiErrorToString(err)));
+      return res.status(400).json(BadRequestException(apiErrorToString(err)));
     }
   };
 }

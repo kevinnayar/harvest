@@ -1,4 +1,5 @@
 import { TypeUserReducer, TypeUserDispatch } from './userTypes';
+import { TypeZoneReducer, TypeZoneDispatch } from './zoneTypes';
 
 export type TypeApiXferStatus = {
   requested: boolean;
@@ -14,9 +15,10 @@ export type TypeBaseDispatch = {
 
 export type TypeAppReducer = {
   user: TypeUserReducer;
+  zone: TypeZoneReducer;
 };
 
-export type TypeAppDispatch = TypeUserDispatch;
+export type TypeAppDispatch = TypeUserDispatch | TypeZoneDispatch;
 
 export type TypeDBConfig = {
   database: string;
@@ -24,3 +26,10 @@ export type TypeDBConfig = {
   port: number;
   user: string;
 };
+
+export type TypeHttpException = {
+  status: number;
+  statusText: string;
+  message: string;
+};
+

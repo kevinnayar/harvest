@@ -7,7 +7,6 @@ import {
   TypeZoneDispatch,
 } from '../../../types/zoneTypes';
 
-
 const initialState: TypeZoneReducer = {
   getZoneXferStatus: apiXferInit(),
   zoneState: undefined,

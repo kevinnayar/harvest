@@ -6,7 +6,7 @@ import {
   TypeZoneDispatch,
 } from '../../../types/zoneTypes';
 import config from '../../config';
-
+import { apiResponseHandler } from '../../../utils/apiUtils';
 
 export function getZone(zipcode: string) {
   return async (dispatch: (action: TypeZoneDispatch) => void) => {
@@ -17,6 +17,7 @@ export function getZone(zipcode: string) {
     try {
       const payload: TypeZoneState = await fetch(`${config.apiUrl}/api/plantzones/${zipcode}`)
         .then((res) => res.json())
+        .then(apiResponseHandler)
         .then((response) => {
           const zoneState: TypeZoneState = {
             id: parseInt(response.id, 10),
@@ -27,7 +28,7 @@ export function getZone(zipcode: string) {
           return zoneState;
         })
         .catch((error) => {
-          throw new Error(error);
+          throw error;
         });
       dispatch({
         type: GET_ZONE_SUCCEEDED,

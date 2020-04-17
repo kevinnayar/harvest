@@ -10,6 +10,13 @@ export function apiErrorToString(error: string | { message: string }): string {
   return typeof error === 'string' ? error : error.message;
 }
 
+export function apiResponseHandler(response: any) {
+  if ('status' in response && response.status !== 200) {
+    throw apiErrorToString(response);
+  }
+  return response;
+}
+
 export function stringOrThrow(value: any, message: string): string {
   if (typeof value === 'string') return value;
   throw new Error(message);

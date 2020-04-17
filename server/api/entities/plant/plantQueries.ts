@@ -25,7 +25,7 @@ export default class PlantQueries {
           .status(404)
           .json(NotFoundException('Could not find plant.'));
     } catch (err) {
-      return res.status(404).json(BadRequestException(apiErrorToString(err)));
+      return res.status(400).json(BadRequestException(apiErrorToString(err)));
     }
   };
 
@@ -43,7 +43,7 @@ export default class PlantQueries {
           .status(404)
           .json(NotFoundException(`Could not find plant zone for zipcode: ${zipcode}.`));
     } catch (err) {
-      return res.status(404).json(BadRequestException(apiErrorToString(err)));
+      return res.status(400).json(BadRequestException(apiErrorToString(err)));
     }
   };
 }

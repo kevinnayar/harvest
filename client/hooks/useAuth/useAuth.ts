@@ -5,24 +5,19 @@ import { TypeAppReducer } from '../../../types/baseTypes';
 import { TypeUserCredentials, TypeUserState } from '../../../types/userTypes';
 
 function useAuth() {
-  const dispatch = useDispatch();
   const userState = useSelector<TypeAppReducer, TypeUserState>(state => state.user.userState);
   const isAuthenticated = useSelector<TypeAppReducer, boolean>(state => state.user.userState.authenticated);
-
-  function handleLogin(userCredentials: TypeUserCredentials) {
-    dispatch(userAuthLogin(userCredentials));
-  }
-
-  function handleLogout() {
-    dispatch(userAuthLogout());
-  }
+  
+  const dispatch = useDispatch();
+  const onLogin = (userCredentials: TypeUserCredentials) => dispatch(userAuthLogin(userCredentials));
+  const onLogout = () => dispatch(userAuthLogout());
 
   return {
     userState,
-    onLogin: handleLogin,
-    onLogout: handleLogout,
     isAuthenticated,
     redirectPath: '/home',
+    onLogin,
+    onLogout,
   };
 }
 

@@ -6,21 +6,14 @@ import useAuth from '../../hooks/useAuth/useAuth';
 
 const Login = () => {
   const redirectPath = useRedirectPath();
-  const { onLogin, isAuthenticated } = useAuth();
+  const { isAuthenticated, onLogin } = useAuth();
 
-  if (isAuthenticated) {
-    return <Redirect to={redirectPath} />;
-  }
-
-  const credentials = {
-    email: 'test@test.com',
-    password: 'Passw0rd!',
-  };
+  if (isAuthenticated) return <Redirect to={redirectPath} />;
 
   return (
     <div>
       <h1>Welcome!</h1>
-      <button onClick={(e) => onLogin(credentials)}>Login</button>
+      <button type="button" onClick={(_e) => onLogin({ email: 'test@test.com', password: 'Passw0rd!' })}>Login</button>
     </div>
   );
 };

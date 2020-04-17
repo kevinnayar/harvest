@@ -5,9 +5,7 @@ import useAuth from '../../hooks/useAuth/useAuth';
 const Home = () => {
   const { isAuthenticated, onLogout, userState } = useAuth();
 
-  if (!isAuthenticated) {
-    return <Redirect to="/auth" />;
-  }
+  if (!isAuthenticated) return <Redirect to="/auth" />;
 
   return (
     <div>

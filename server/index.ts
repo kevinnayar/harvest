@@ -3,7 +3,7 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as api from './api/api';
 
-import { apiErrorToString, strictStringOrThrow, numberOrThrow } from '../utils/apiUtils';
+import { apiFormatError, strictStringOrThrow, numberOrThrow } from '../utils/apiUtils';
 import { TypeDBConfig } from '../types/baseTypes';
 
 dotenv.config();
@@ -47,14 +47,14 @@ function main() {
     api.register(app, dbConfig);
 
     const server = app.listen(apiPort, (err) => {
-      if (err) throw new Error(`Error starting server: ${apiErrorToString(err)}`);
+      if (err) throw new Error(`Error starting server: ${apiFormatError(err)}`);
       console.info(`\n  🌎   API is running at ${apiUrl}\n`);
     });
 
     server.keepAliveTimeout = 0;
     server.timeout = 60 * 60 * 1000;
   } catch (err) {
-    throw new Error(`\n  💀   ERROR: ${apiErrorToString(err)}\n`);
+    throw new Error(`\n  💀   ERROR: ${apiFormatError(err)}\n`);
   }
 }
 

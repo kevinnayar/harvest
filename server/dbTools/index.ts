@@ -1,0 +1,159 @@
+import * as dotenv from 'dotenv';
+import * as fs from 'fs-extra';
+import { Client } from 'pg';
+import { getMonthToIndex } from '../../utils/stringUtils';
+
+async function dbDropTablesAll(pgClient: Client, rebuildZipcodes: boolean): Promise<void> {
+  try {
+    const statements = [
+      'DROP TABLE IF EXISTS users;',
+      'DROP TABLE IF EXISTS plants;',
+      'DROP TABLE IF EXISTS zones;',
+      ...(rebuildZipcodes ? ['DROP TABLE IF EXISTS zones_zipcodes;'] : []),
+    ];
+
+    for (const statement of statements) {
+      if (statement.length > 3) {
+        await pgClient.query(statement);
+      }
+    }
+  } catch (err) {
+    console.error(`Failed: dbDropTablesAll: ${err}`);
+    throw err;
+  }
+}
+
+async function dbCreateTablesAll(pgClient: Client): Promise<void> {
+  try {
+    const sql = await fs.readFile('./server/dbTools/index.pgsql', { encoding: 'UTF-8' });
+    const statements: string[] = sql.split(/;\s*$/m);
+
+    for (const statement of statements) {
+      if (statement.length > 3) {
+        await pgClient.query(statement);
+      }
+    }
+  } catch (err) {
+    console.error(`Failed: dbCreateTablesAll: ${err}`);
+    throw err;
+  }
+}
+
+async function dbBuildTableUsers(pgClient: Client, now: string): Promise<void> {
+  try {
+    const query = `
+      INSERT INTO users (id, user_name, status, date_created)
+      VALUES
+        ('user_1', 'John Doe', 'enabled', ${now}),
+        ('user_2', 'Jane Doe', 'enabled', ${now})
+      ;
+    `;
+    await pgClient.query(query);
+  } catch (err) {
+    console.error(`Failed: dbBuildTableUsers: ${err}`);
+    throw err;
+  }
+}
+
+async function dbBuildTablePlants(pgClient: Client, now: string): Promise<void> {
+  try {
+    const query = `
+      INSERT INTO plants (id, plant_name, category, user_id, status, date_planted, date_created)
+      VALUES 
+        ('plant_1', 'cilantro', 'herb', 'user_1', 'enabled', ${now}, ${now}),
+        ('plant_2', 'arugula', 'vegetable', 'user_1', 'enabled', ${now}, ${now}),
+        ('plant_3', 'apple', 'fruit', 'user_2', 'enabled', ${now}, ${now})
+      ;
+    `;
+    await pgClient.query(query);
+  } catch (err) {
+    console.error(`Failed: dbBuildTablePlants: ${err}`);
+    throw err;
+  }
+}
+
+async function dbBuildTableZones(pgClient: Client): Promise<void> {
+  try {
+    const file = await fs.readFile('./data/dates.json', { encoding: 'UTF-8' });
+    const json = JSON.parse(file);
+    const { dates } = json;
+
+    for (const date of dates) {
+      const first = date.firstFrostDate.split(' ');
+      const firstFrostDay = first[1];
+      const firstFrostMonth = getMonthToIndex(first[0]);
+
+      const last = date.lastFrostDate.split(' ');
+      const lastFrostDay = last[1];
+      const lastFrostMonth = getMonthToIndex(last[0]);
+
+      const query = `
+        INSERT INTO 
+          zones (id, zone, first_frost_day, first_frost_month, last_frost_day, last_frost_month)
+        VALUES
+          ('zone_${date.zone}', '${date.zone}', '${firstFrostDay}', '${firstFrostMonth}', '${lastFrostDay}', '${lastFrostMonth}')
+        ;
+      `;
+      await pgClient.query(query);
+    }
+  } catch (err) {
+    console.error(`Failed: dbBuildTableZones: ${err}`);
+    throw err;
+  }
+}
+
+async function dbBuildTableZonesZipcodes(pgClient: Client): Promise<void> {
+  try {
+    const file = await fs.readFile('./data/phzm.json', { encoding: 'UTF-8' });
+    const json = JSON.parse(file);
+    const zipcodes = Object.keys(json);
+
+    for (const zipcode of zipcodes) {
+      const item = json[zipcode];
+      const query = `
+      INSERT INTO 
+        zones_zipcodes (id, zipcode, zone, t_range)
+      VALUES
+        ('zipcode_${item.zipcode}', '${item.zipcode}', '${item.zone}', '${item.tRange}')
+      ;
+    `;
+      console.log(query);
+      await pgClient.query(query);
+    }
+  } catch (err) {
+    console.error(`Failed: dbBuildTableZonesZipcodes: ${err}`);
+    throw err;
+  }
+}
+
+async function main(_rebuildZipcodes?: string): Promise<void> {
+  dotenv.config();
+  const pgClient: Client = new Client();
+  const rebuildZipcodes = Boolean(_rebuildZipcodes);
+  const now = `to_timestamp(${Date.now()} / 1000.0)`;
+
+  try {
+    await pgClient.connect();
+
+    await dbDropTablesAll(pgClient, rebuildZipcodes);
+
+    await dbCreateTablesAll(pgClient);
+
+    await dbBuildTableUsers(pgClient, now);
+    await dbBuildTablePlants(pgClient, now);
+    await dbBuildTableZones(pgClient);
+    if (rebuildZipcodes) await dbBuildTableZonesZipcodes(pgClient);
+  } catch (err) {
+    console.error(err);
+    throw err;
+  } finally {
+    await pgClient.end();
+  }
+}
+
+main(process.env.REBUILD_ZIPCODES)
+  .then(() => console.log('DB INIT: finished'))
+  .catch((err) => console.error(`DB INIT: finished with errors: ${err}`));
+
+
+

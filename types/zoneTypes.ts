@@ -1,13 +1,13 @@
 import { TypeBaseDispatch, TypeApiXferStatus } from './baseTypes';
 
-export const GET_ZONE_REQUESTED = 'GET_ZONE_REQUESTED';
-export const GET_ZONE_SUCCEEDED = 'GET_ZONE_SUCCEEDED';
-export const GET_ZONE_FAILED = 'GET_ZONE_FAILED';
+export const ZONE_GET_BY_ZIPCODE_REQUESTED = 'ZONE_GET_BY_ZIPCODE_REQUESTED';
+export const ZONE_GET_BY_ZIPCODE_SUCCEEDED = 'ZONE_GET_BY_ZIPCODE_SUCCEEDED';
+export const ZONE_GET_BY_ZIPCODE_FAILED = 'ZONE_GET_BY_ZIPCODE_FAILED';
 
 interface IZoneKeys {
-  GET_ZONE_REQUESTED: 'GET_ZONE_REQUESTED',
-  GET_ZONE_SUCCEEDED: 'GET_ZONE_SUCCEEDED',
-  GET_ZONE_FAILED: 'GET_ZONE_FAILED',
+  ZONE_GET_BY_ZIPCODE_REQUESTED: 'ZONE_GET_BY_ZIPCODE_REQUESTED',
+  ZONE_GET_BY_ZIPCODE_SUCCEEDED: 'ZONE_GET_BY_ZIPCODE_SUCCEEDED',
+  ZONE_GET_BY_ZIPCODE_FAILED: 'ZONE_GET_BY_ZIPCODE_FAILED',
 }
 
 export type TypeZoneDispatch = TypeBaseDispatch & {
@@ -15,10 +15,14 @@ export type TypeZoneDispatch = TypeBaseDispatch & {
 };
 
 export type TypeZoneState = {
-  id: number;
-  zipcode: number;
+  id: string;
+  zipcode: string;
   zone: string;
   tRange: string;
+  firstFrostDay: number;
+  firstFrostMonth: number;
+  lastFrostDay: number;
+  lastFrostMonth: number;
 };
 
 export type TypeZoneReducer = {

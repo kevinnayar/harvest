@@ -1,8 +1,8 @@
-import { apiXferInit, apiXferRequested, apiXferSucceeded, apiXferFailed } from '../../../utils/reduxUtils';
+import { apiXferInit, apiXferRequested, apiXferSucceeded, apiXferFailed } from '../../../utils/apiUtils';
 import {
-  GET_ZONE_REQUESTED,
-  GET_ZONE_SUCCEEDED,
-  GET_ZONE_FAILED,
+  ZONE_GET_BY_ZIPCODE_REQUESTED,
+  ZONE_GET_BY_ZIPCODE_SUCCEEDED,
+  ZONE_GET_BY_ZIPCODE_FAILED,
   TypeZoneReducer,
   TypeZoneDispatch,
 } from '../../../types/zoneTypes';
@@ -17,20 +17,20 @@ export default function zoneReducer(
   action: TypeZoneDispatch,
 ): TypeZoneReducer {
   switch (action.type) {
-    case GET_ZONE_REQUESTED: {
+    case ZONE_GET_BY_ZIPCODE_REQUESTED: {
       return {
         ...state,
         getZoneXferStatus: apiXferRequested(),
       };
     }
-    case GET_ZONE_SUCCEEDED: {
+    case ZONE_GET_BY_ZIPCODE_SUCCEEDED: {
       return {
         ...state,
         getZoneXferStatus: apiXferSucceeded(),
         zoneState: action.payload,
       };
     }
-    case GET_ZONE_FAILED: {
+    case ZONE_GET_BY_ZIPCODE_FAILED: {
       return {
         ...state,
         getZoneXferStatus: apiXferFailed(action.error),

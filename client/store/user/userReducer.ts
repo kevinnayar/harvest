@@ -1,4 +1,4 @@
-import { apiXferInit, apiXferRequested, apiXferSucceeded, apiXferFailed } from '../../../utils/reduxUtils';
+import { apiXferInit, apiXferRequested, apiXferSucceeded, apiXferFailed } from '../../../utils/apiUtils';
 import {
   USER_AUTH_LOGIN_REQUESTED,
   USER_AUTH_LOGIN_SUCCEEDED,

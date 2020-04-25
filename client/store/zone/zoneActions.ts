@@ -1,7 +1,7 @@
 import {
-  GET_ZONE_REQUESTED,
-  GET_ZONE_SUCCEEDED,
-  GET_ZONE_FAILED,
+  ZONE_GET_BY_ZIPCODE_REQUESTED,
+  ZONE_GET_BY_ZIPCODE_SUCCEEDED,
+  ZONE_GET_BY_ZIPCODE_FAILED,
   TypeZoneState,
   TypeZoneDispatch,
 } from '../../../types/zoneTypes';
@@ -11,19 +11,24 @@ import { apiResponseHandler } from '../../../utils/apiUtils';
 export function getZone(zipcode: string) {
   return async (dispatch: (action: TypeZoneDispatch) => void) => {
     dispatch({
-      type: GET_ZONE_REQUESTED,
+      type: ZONE_GET_BY_ZIPCODE_REQUESTED,
     });
 
     try {
-      const payload: TypeZoneState = await fetch(`${config.apiUrl}/api/plantzones/${zipcode}`)
+      const payload: TypeZoneState = await fetch(`${config.apiUrl}/api/zones/${zipcode}`)
         .then((res) => res.json())
         .then(apiResponseHandler)
-        .then((response) => {
+        .then((response) => { 
+          const { id, zipcode, zone, tRange, firstFrostDay, firstFrostMonth, lastFrostDay, lastFrostMonth } = response;
           const zoneState: TypeZoneState = {
-            id: parseInt(response.id, 10),
-            zipcode: parseInt(response.zipcode, 10),
-            zone: response.zone,
-            tRange: response.tRange,
+            id,
+            zipcode,
+            zone,
+            tRange,
+            firstFrostDay,
+            firstFrostMonth,
+            lastFrostDay,
+            lastFrostMonth,
           };
           return zoneState;
         })
@@ -31,12 +36,12 @@ export function getZone(zipcode: string) {
           throw error;
         });
       dispatch({
-        type: GET_ZONE_SUCCEEDED,
+        type: ZONE_GET_BY_ZIPCODE_SUCCEEDED,
         payload,
       });
     } catch (error) {
       dispatch({
-        type: GET_ZONE_FAILED,
+        type: ZONE_GET_BY_ZIPCODE_FAILED,
         error,
       });
     }

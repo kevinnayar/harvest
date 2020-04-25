@@ -22,7 +22,7 @@ export function userAuthLogin(userCredentials: TypeUserCredentials) {
         `Pretending to use email: ${userCredentials.email} and password: ${userCredentials.password}`,
       );
       const payload: TypeUserState = {
-        userGuid: 'user_123456',
+        userGuid: 'user_1',
         email: userCredentials.email,
         authenticated: true,
         confirmed: true,

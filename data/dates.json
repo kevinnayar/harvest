@@ -1,0 +1,74 @@
+{
+  "dates": [
+    {
+      "zone": "3a",
+      "firstFrostDate": "June 15",
+      "lastFrostDate": "September 15"
+    },
+    {
+      "zone": "3b",
+      "firstFrostDate": "June 15",
+      "lastFrostDate": "September 15"
+    },
+    {
+      "zone": "4a",
+      "firstFrostDate": "June 1",
+      "lastFrostDate": "October 1"
+    },
+    {
+      "zone": "4b",
+      "firstFrostDate": "June 1",
+      "lastFrostDate": "October 1"
+    },
+    {
+      "zone": "5a",
+      "firstFrostDate": "May 15",
+      "lastFrostDate": "October 15"
+    },
+    {
+      "zone": "5b",
+      "firstFrostDate": "May 15",
+      "lastFrostDate": "October 15"
+    },
+    {
+      "zone": "6a",
+      "firstFrostDate": "May 1",
+      "lastFrostDate": "November 1"
+    },
+    {
+      "zone": "6b",
+      "firstFrostDate": "May 1",
+      "lastFrostDate": "November 1"
+    },
+    {
+      "zone": "7a",
+      "firstFrostDate": "April 15",
+      "lastFrostDate": "November 15"
+    },
+    {
+      "zone": "7b",
+      "firstFrostDate": "April 15",
+      "lastFrostDate": "November 15"
+    },
+    {
+      "zone": "8a",
+      "firstFrostDate": "April 1",
+      "lastFrostDate": "December 1"
+    },
+    {
+      "zone": "8b",
+      "firstFrostDate": "April 1",
+      "lastFrostDate": "December 1"
+    },
+    {
+      "zone": "9a",
+      "firstFrostDate": "March 1",
+      "lastFrostDate": "December 15"
+    },
+    {
+      "zone": "9b",
+      "firstFrostDate": "March 1",
+      "lastFrostDate": "December 15"
+    }
+  ]
+}

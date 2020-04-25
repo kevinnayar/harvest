@@ -1,28 +1,37 @@
-export type TypeUserEntity = {
-  type: 'TypeUserEntity';
+type TypeStatus = 'enabled' | 'disabled';
+
+export type TypeEntityUser = {
+  type: 'TypeEntityUser';
   id: string;
   userName: string;
+  status: TypeStatus,
+  dateCreated: number;
   imageUrl?: string;
-  dateCreated?: number;
 };
 
-export type TypePlantEntity = {
-  type: 'TypePlantEntity';
+export type TypeEntityPlant = {
+  type: 'TypeEntityPlant';
   id: string;
   userId: string;
   plantName: string;
+  category: string;
+  status: TypeStatus;
+  dateCreated: number;
+  datePlanted?: number;
   imageUrl?: string;
-  dob?: number;
-  dateCreated?: number;
 };
 
-export type TypePlantZoneEntity = {
-  type: 'TypePlantZoneEntity';
-  id: number;
-  zipcode: number;
+export type TypeEntityZone = {
+  type: 'TypeEntityZone';
+  id: string;
+  zipcode: string;
   zone: string;
   tRange: string;
+  firstFrostDay: number;
+  firstFrostMonth: number;
+  lastFrostDay: number;
+  lastFrostMonth: number;
 };
 
-export type TypeEntity = TypeUserEntity | TypePlantEntity | TypePlantZoneEntity;
+export type TypeEntity = TypeEntityUser | TypeEntityPlant | TypeEntityZone;
 export type TypeEntityType = Pick<TypeEntity, 'type'>['type'];

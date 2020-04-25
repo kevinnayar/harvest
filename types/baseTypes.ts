@@ -33,3 +33,18 @@ export type TypeHttpException = {
   message: string;
 };
 
+export type TypeMonth =
+  | 'January'
+  | 'February'
+  | 'March'
+  | 'April'
+  | 'May'
+  | 'June'
+  | 'July'
+  | 'August'
+  | 'September'
+  | 'October'
+  | 'November'
+  | 'December'
+;
+

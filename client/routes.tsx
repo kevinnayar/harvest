@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
-import ZipcodeTest from './components/ZipcodeTest/ZipcodeTest';
+import ZoneFinder from './components/ZoneFinder/ZoneFinder';
 
 export default (history: History<any>) => {
   return (
@@ -13,9 +13,10 @@ export default (history: History<any>) => {
       <Route path="/" exact>
         <Redirect to="/auth" />
       </Route>
+
       <Route path="/auth" exact component={Login} />
       <Route path="/home" exact component={Home} />
-      <Route path="/zipcode" exact component={ZipcodeTest} />
+      <Route path="/zone-finder" exact component={ZoneFinder} />
     </Route>
   );
 };

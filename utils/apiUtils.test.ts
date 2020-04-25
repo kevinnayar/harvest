@@ -1,20 +1,18 @@
 import {
-  apiErrorToString,
+  apiFormatError,
   stringOrThrow,
   strictStringOrThrow,
   numberOrThrow,
   predicateOrThrow,
-  convertSqlToEntity,
 } from './apiUtils';
-import { TypeUserEntity, TypePlantEntity } from '../types/entityTypes';
 
 describe('apiUtils.test.ts', () => {
   const err: string = 'error';
   const errObj: { message: string } = { message: err };
 
-  test('apiErrorToString', () => {
-    expect(apiErrorToString(err)).toEqual(err);
-    expect(apiErrorToString(errObj)).toEqual(err);
+  test('apiFormatError', () => {
+    expect(apiFormatError(err)).toEqual(err);
+    expect(apiFormatError(errObj)).toEqual(err);
   });
 
   test('stringOrThrow', () => {
@@ -52,58 +50,5 @@ describe('apiUtils.test.ts', () => {
     expect(predicateOrThrow(isZipcode, 90210, err)).toEqual(90210);
     expect(() => predicateOrThrow(isZipcode, 1, err)).toThrow(err);
     expect(() => predicateOrThrow(isZipcode, 111111, err)).toThrow(err);
-  });
-
-  test('convertSqlToEntity', () => {
-    const userBase = {
-      id: 'user_1',
-      user_name: 'jon',
-    };
-    const userFull = {
-      ...userBase,
-      image_url: 'image',
-      date_created: 1,
-    };
-    const userResultBase: TypeUserEntity = {
-      type: 'TypeUserEntity',
-      id: 'user_1',
-      userName: 'jon',
-      imageUrl: undefined,
-      dateCreated: undefined,
-    }
-    const plantBase = {
-      id: 'plant_1',
-      user_id: 'user_1',
-      plant_name: 'yarrow',
-    };
-    const plantFull = {
-      ...plantBase,
-      image_url: 'image',
-      dob: 1,
-      date_created: 1,
-    };
-    const plantResultBase: TypePlantEntity = {
-      type: 'TypePlantEntity',
-      id: 'plant_1',
-      userId: 'user_1',
-      plantName: 'yarrow',
-      imageUrl: undefined,
-      dob: undefined,
-      dateCreated: undefined,
-    }
-
-    expect(convertSqlToEntity('TypeUserEntity', userBase)).toEqual(userResultBase);
-    expect(convertSqlToEntity('TypeUserEntity', userFull)).toEqual({
-      ...userResultBase,
-      imageUrl: 'image',
-      dateCreated: 1,
-    });
-    expect(convertSqlToEntity('TypePlantEntity', plantBase)).toEqual(plantResultBase);
-    expect(convertSqlToEntity('TypePlantEntity', plantFull)).toEqual({
-      ...plantResultBase,
-      imageUrl: 'image',
-      dob: 1,
-      dateCreated: 1,
-    });
   });
 });

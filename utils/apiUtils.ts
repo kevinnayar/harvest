@@ -1,18 +1,48 @@
-import {
-  TypeUserEntity,
-  TypePlantEntity,
-  TypePlantZoneEntity,
-  TypeEntityType,
-  TypeEntity,
-} from '../types/entityTypes';
+import { TypeApiXferStatus } from '../types/baseTypes';
 
-export function apiErrorToString(error: string | { message: string }): string {
-  return typeof error === 'string' ? error : error.message;
+export function apiXferInit(): TypeApiXferStatus {
+  return {
+    requested: false,
+    succeeded: false,
+    failed: false,
+    error: null,
+  };
+}
+
+export function apiXferRequested(): TypeApiXferStatus {
+  return {
+    requested: true,
+    succeeded: false,
+    failed: false,
+    error: null,
+  };
+}
+
+export function apiXferSucceeded(): TypeApiXferStatus {
+  return {
+    requested: false,
+    succeeded: true,
+    failed: false,
+    error: null,
+  };
+}
+
+export function apiXferFailed(error: string | { message: string }): TypeApiXferStatus {
+  return {
+    requested: false,
+    succeeded: false,
+    failed: true,
+    error: apiFormatError(error),
+  };
+}
+
+export function apiFormatError(error: string | { message: string }): string {
+  return typeof error === 'object' && 'message' in error ? error.message.toString() : error;
 }
 
 export function apiResponseHandler(response: any) {
   if ('status' in response && response.status !== 200) {
-    throw apiErrorToString(response);
+    throw apiFormatError(response);
   }
   return response;
 }
@@ -37,60 +67,3 @@ export function predicateOrThrow<T>(predicateFunc: (value: T) => boolean, value:
   throw new Error(message);
 }
 
-function convertUserSqlToEntity(entity: any): TypeUserEntity {
-  try {
-    return {
-      type: 'TypeUserEntity',
-      id: entity.id,
-      userName: entity.user_name,
-      imageUrl: entity.image_url || undefined,
-      dateCreated: entity.date_created || undefined,
-    };
-  } catch (err) {
-    throw new Error(err);
-  }
-}
-
-function convertPlantSqlToEntity(entity: any): TypePlantEntity {
-  try {
-    return {
-      type: 'TypePlantEntity',
-      id: entity.id,
-      userId: entity.user_id,
-      plantName: entity.plant_name,
-      imageUrl: entity.image_url || undefined,
-      dob: entity.dob || undefined,
-      dateCreated: entity.date_created || undefined,
-    }
-  } catch (err) {
-    throw new Error(err);
-  }
-}
-
-function convertPlantZoneSqlEntity(entity: any): TypePlantZoneEntity {
-  try {
-    const { id, zipcode, zone } = entity;
-    return {
-      type: 'TypePlantZoneEntity',
-      id,
-      zipcode,
-      zone,
-      tRange: entity.t_range,
-    };
-  } catch (err) {
-    throw new Error(err);
-  }
-}
-
-export function convertSqlToEntity(entityType: TypeEntityType, entity: any): TypeEntity {
-  switch (entityType) {
-    case 'TypeUserEntity':
-      return convertUserSqlToEntity(entity);
-    case 'TypePlantEntity':
-      return convertPlantSqlToEntity(entity);
-    case 'TypePlantZoneEntity':
-      return convertPlantZoneSqlEntity(entity);
-    default:
-      throw new Error(`convertSqlToEntity: unexpected entity type: ${entityType}`);
-  }
-}

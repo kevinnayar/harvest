@@ -3,6 +3,7 @@ import * as _pgPromise from 'pg-promise';
 import { IMain, IDatabase } from 'pg-promise';
 
 import _userQueries from './entities/user/userQueries';
+import _userCommands from './entities/user/userCommands';
 import _plantQueries from './entities/plant/plantQueries';
 import _zoneQueries from './entities/zone/zoneQueries';
 
@@ -15,6 +16,9 @@ export const register = (app: Application, config: TypeDBConfig) => {
   const userQueries = _userQueries(db);
   app.get(`/api/users/:userId`, userQueries.getUserById);
   app.get(`/api/users/:userId/plants`, userQueries.getPlantsByUserId);
+
+  const userCommands = _userCommands(db);
+  app.post(`/api/users/:userId`, userCommands.getUserById);
 
   const plantQueries = _plantQueries(db);
   app.get(`/api/plants/:plantId`, plantQueries.getPlantById);

@@ -38,6 +38,4 @@ const overrides = {
   },
 };
 
-const theme = createTheme(primitives, overrides);
-
-export default theme;
+export default createTheme(primitives, overrides);

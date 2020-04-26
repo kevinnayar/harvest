@@ -1,30 +1,608 @@
 {
-  "zones": [ 
-    "1a",
-    "1b",
-    "2a",
-    "2b",
-    "3a",
-    "3b",
-    "4a",
-    "4b",
-    "5a",
-    "5b",
-    "6a",
-    "6b",
-    "7a",
-    "7b",
-    "8a",
-    "8b",
-    "9a",
-    "9b",
-    "10a",
-    "10b",
-    "11a",
-    "11b",
-    "12a",
-    "12b",
-    "13a",
-    "13b"
-  ]
+  "1": {
+    "title": "Planting Zone 1",
+    "description": "USDA Plant Hardiness Zone 1 is the coldest zone designation for the United States. With minimum average temperatures between -60 to -50 degrees F, it can be a difficult zone for gardening. The majority of Zone 1 is located in Alaska. This tundra environment is extremely harsh and plants must have extreme cold hardiness and drought tolerance.",
+    "temperature": [
+      "Zone 1 can expect minimum average temperatures of -60 to -50 degrees F",
+      "Zone 1a has a minimum average temperature of -60 to -55 degrees F",
+      "Zone 1b has a minimum average temperature of -55 to -50 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Planting in Zone 1 can be quite challenging. Plants able to withstand the tundra are rare. Native plants have already adapted to the area, so it makes sense that they’re a natural, excellent choice. Annuals are also a popular option, since they don’t need to survive the winter. While there are relatively few non-native perennials suitable for Zone 1, some can be grown with proper planting and care.",
+    "vegetables": [
+      "Beans",
+      "Broccoli",
+      "Cabbage",
+      "Kale",
+      "Lettuce",
+      "Potatoes",
+      "Radish",
+      "Spinach",
+      "Sweet Peas",
+      "Tomatoes"
+    ],
+    "fruit_trees": [
+      "Chokecherry",
+      "End apple",
+      "Fort Mac Mac apple",
+      "Haskap",
+      "September Ruby apple"
+    ],
+    "herbs": [
+      "Basil",
+      "Chives",
+      "Mint",
+      "Oregano",
+      "Rosemary",
+      "Thyme"
+    ],
+    "flowers": [
+      "Arrowhead",
+      "Delphinium",
+      "Goldenrod",
+      "Sunflower",
+      "Lily of the Valley",
+      "Oxeye Daisy",
+      "Yarrow"
+    ]
+  },
+  "2": {
+    "title": "Planting Zone 2",
+    "description": "Located in both Alaska and the continental United States, planting Zone 2 features extremely cold average minimum temperatures of between -50 to -40 degrees F. These temperatures can present a growing challenge to many gardeners. High winds and drought conditions are found in both the tundra and plains of Zone 2. Planting native plants, growing annuals and using creative planting techniques give gardeners a growing advantage.",
+    "temperature": [
+      "Zone 2 can expect minimum average temperatures of -50 to -40 degrees F",
+      "Zone 2a has a minimum average temperature of -50 to -45 degrees F",
+      "Zone 2b has a minimum average temperature of -45 to -40 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Plants in Zone 2 must be able to withstand extreme cold and high levels of drought. Native plants are best adapted to the environment. Annuals are best suited for this zone, but some perennials can be grown when chosen carefully.",
+    "vegetables": [
+      "Carrots",
+      "Mustard greens",
+      "Onions",
+      "Parsnips",
+      "Swiss chard"
+    ],
+    "fruit_trees": [
+      "Brookgold plum",
+      "Fall Red apple",
+      "Fofonoff plum",
+      "Garrington Chokecherry",
+      "Korean pine",
+      "Minnesota 1734 apple",
+      "Norkent apple",
+      "Parkland apple",
+      "Pembina plum"
+    ],
+    "herbs": [
+      "Hyssop",
+      "Juniper",
+      "Turkestan Rose"
+    ],
+    "flowers": [
+      "Bleeding Heart",
+      "Monkshood",
+      "Penstemon",
+      "Poppy",
+      "Primrose",
+      "Sea Holly",
+      "Violet"
+    ]
+  },
+  "3": {
+    "title": "Planting Zone 3",
+    "description": "Plant hardiness Zone 3 is found throughout Alaska, the northern portions of the United States and in high altitude areas. This zone features minimum average temperatures of -40 to -30 degrees F. Depending on the geographical location of your growing space, high winds, extreme cold and low moisture may affect growing conditions.",
+    "temperature": [
+      "Zone 3 can expect minimum average temperatures of -40 to -30 degrees F",
+      "Zone 3a has a minimum average temperature of -40 to -35 degrees F",
+      "Zone 3b has a minimum average temperature of -35 to -30 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "The cold minimum average temperatures in Zone 3 limits plant choices to those that have adapted to low temperatures. Most native plants can be grown across the zone, regardless of altitude, as long as growing conditions are similar. The short growing season limits vegetable and flowering annuals, but you can extend the growing season by starting plants indoors or purchasing from a greenhouse.",
+    "vegetables": [
+      "Asparagus",
+      "Celery",
+      "Cucumbers",
+      "Summer squash",
+      "Winter squash"
+    ],
+    "fruit_trees": [
+      "Cupid cherry",
+      "Dolgo crabapple",
+      "Early Gold pear",
+      "Evans cherry",
+      "Golden Spice pear",
+      "Goodland apple",
+      "Sweet Sixteen apple",
+      "Toka plum",
+      "Waneta plum",
+      "Westcot apricot"
+    ],
+    "herbs": [
+      "Caraway",
+      "Catnip",
+      "English chamomile",
+      "French sorrel",
+      "Garlic",
+      "Horseradish",
+      "Parsley",
+      "Peppermint"
+    ],
+    "flowers": [
+      "Alpine Rockcress",
+      "Aster",
+      "Blanket Flower",
+      "Liatris varieties",
+      "Salvia",
+      "Snow-in-Summer",
+      "Spurge",
+      "Virginia Bluebells",
+      "Wallflower"
+    ]
+  },
+  "4": {
+    "title": "Planting Zone 4",
+    "description": "Planting Zone 4 covers the southern coastal areas of Alaska, northern areas of the United States and high elevations found in the western mountains. These unique climates share minimum average temperatures of between -30 to -20 degrees F. Planting in this zone is less challenging than in colder zones, but the short growing season impacts both vegetables and flower bloom times.",
+    "temperature": [
+      "Zone 4 can expect minimum average temperatures of -30 to -20 degrees F",
+      "Zone 4a has a minimum average temperature of -30 to -25 degrees F",
+      "Zone 4b has a minimum average temperature of -25 to -20 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Zone 4 is considered a cool climate suitable for growing plants hardy enough to withstand temperatures well below freezing. To combat the typically short growing season, gardeners can get a head start by starting plants indoors or purchasing starts from a greenhouse. Adding a good layer of mulch and taking preventative winter measures can help some plants survive the cold winters.",
+    "vegetables": [
+      "Eggplant",
+      "Melons",
+      "Okra",
+      "Pumpkins"
+    ],
+    "fruit_trees": [
+      "Alderman plum",
+      "Alexander apple",
+      "Buartnut",
+      "Butternut",
+      "Ewing blue plum",
+      "Nova pear",
+      "Railroad apple",
+      "Summercrisp pear",
+      "Trent apple"
+    ],
+    "herbs": [
+      "Angelica",
+      "Bee balm",
+      "Garden sage",
+      "Lemon balm",
+      "Mountain mint",
+      "Thyme",
+      "Winter savory"
+    ],
+    "flowers": [
+      "Coneflower",
+      "Daylily",
+      "Iris",
+      "Phlox",
+      "Plantain lily (Hostas)"
+    ]
+  },
+  "5": {
+    "title": "Planting Zone 5",
+    "description": "Plant hardiness Zone 5 includes the southern coastal region of Alaska, the North Central United States and portions of New England. With minimum average temperatures between -20 and -10 degrees F, this zone experiences a moderately cold winter. While the growing season is short, you can extend it by using cold frames or using started plants in your annual garden.",
+    "temperature": [
+      "Zone 5 can expect minimum average temperatures of -20 to -10 degrees F",
+      "Zone 5a has a minimum average temperature of -20 to -15 degrees F",
+      "Zone 5b has a minimum average temperature of -15 to -10 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Zone 5 gardens feature a wide range of environments. From coastal waters and woodlands to the wide plains of the Midwest, plants should not only be cold hardy, but they also need to match the growing environment. Gardens feature longer growing seasons that result in an increased vegetable harvest and extended blooms in landscaping.",
+    "vegetables": [
+      "Kale",
+      "Lettuce",
+      "Radishes",
+      "Spinach",
+      "Winter greens"
+    ],
+    "fruit_trees": [
+      "Harrow Delight pear",
+      "Honeycrisp apple",
+      "Native pawpaw trees",
+      "Pink Lady apple",
+      "Snow Beauty peach",
+      "Superior plum",
+      "Warren pear"
+    ],
+    "herbs": [
+      "Hybrid mints",
+      "Large-flowered calamint",
+      "Lavender"
+    ],
+    "flowers": [
+      "Baptisia",
+      "Black-eyed Susan",
+      "Campanula",
+      "Cinquefoil",
+      "Russian Sage"
+    ]
+  },
+  "6": {
+    "title": "Planting Zone 6",
+    "description": "USDA Hardiness Zone 6 covers a large portion of the United States. Known as a generally mild climate, the average minimum winter temperature is between -10 to 0 degrees F. With cold winter and mild-to-hot summers, you have many growing options in Zone 6.",
+    "temperature": [
+      "Zone 6 can expect minimum average temperatures of -10 to -0 degrees F",
+      "Zone 6a has a minimum average temperature of -10 to -5 degrees F",
+      "Zone 6b has a minimum average temperature of -5 to -0 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Zone 6 features many plants ideal for gardening and landscaping. Seed companies, nurseries and garden centers offer Zone 6 gardeners countless options. In many areas, spring, summer and fall blooms and vegetables are all possible.",
+    "vegetables": [
+      "Bush beans",
+      "Butter lettuce",
+      "Indeterminate tomatoes",
+      "Longer season melons",
+      "Winter squash"
+    ],
+    "fruit_trees": [
+      "Jefferson",
+      "Late Crawford",
+      "Loring",
+      "Madison",
+      "Nectar",
+      "Red Globe"
+    ],
+    "herbs": [
+      "Borage",
+      "Coriander",
+      "Dill",
+      "False chamomile",
+      "Oregano"
+    ],
+    "flowers": [
+      "False sunflower",
+      "Floribunda rose",
+      "Flowering fern",
+      "Japanese Bottlebrush",
+      "Lady’s Mantle",
+      "Sedum"
+    ]
+  },
+  "7": {
+    "title": "Planting Zone 7",
+    "description": "Planting Zone 7 reaches across approximately 15 U.S. states. This zone features cool winters with average minimum temperatures falling between 0 to 10 degrees F. Gardens in this zone have multiple plant options from seed catalogues, local home stores, nurseries and greenhouses.",
+    "temperature": [
+      "Zone 7 can expect minimum average temperatures of 0 to 10 degrees F",
+      "Zone 7a has a minimum average temperature of 0 to 5 degrees F",
+      "Zone 7b has a minimum average temperature of 5 to 10 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Zone 7 contains many different growing climates, from the Eastern coastal areas through the Oklahoma prairies to the arid regions of the southwest and up into the forests of Oregon and Washington. The region’s wide variety in climates means that other considerations often need to be made to accommodate for drought tolerance and to adequately adjust soil conditions. Many Zone 7 hardy plants can be grown successfully in multiple locations with adjustments made to address their specific needs.",
+    "vegetables": [
+      "Arugula",
+      "Hot peppers",
+      "Long growing season vegetables",
+      "Sweet peppers",
+      "Turnips"
+    ],
+    "fruit_trees": [
+      "Bing cherry",
+      "Blue Java banana",
+      "Contender peach",
+      "Cortland apple",
+      "Fuji apple",
+      "Fuyu persimmon",
+      "Granny Smith apple",
+      "Moorpark apricot",
+      "Ozark plum",
+      "Parker pear",
+      "Rainier Sweet cherry",
+      "Red Gold nectarine",
+      "Scout apricot",
+      "Stella cherry",
+      "Turkey fig",
+      "Wide variety of mulberries, elderberries and pawpaw trees"
+    ],
+    "herbs": [
+      "Feverfew",
+      "Marjoram",
+      "Rue",
+      "Sage",
+      "Tarragon"
+    ],
+    "flowers": [
+      "Butterfly weed",
+      "Candytuft",
+      "Chrysanthemum",
+      "Clematis",
+      "Forget-me-not",
+      "Four O’clock",
+      "Painted daisy",
+      "Peony"
+    ]
+  },
+  "8": {
+    "title": "Planting Zone 8",
+    "description": "Zone 8 is considered one of the warmest plant hardiness zones for a large portion of the southern United States. Extending up the western coast, Zone 8 features average minimum winter temperatures of 10 to 20 degrees F. With hot summers and mild winters, growers typically enjoy a long planting season.",
+    "temperature": [
+      "Zone 8 can expect minimum average temperatures of 10 to 20 degrees",
+      "Zone 8a has a minimum average temperature of 10 to 15 degrees F",
+      "Zone 8b has a minimum average temperature of 15 to 20 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Plants hardy for Zone 8 love mild winters and long, hot summers. With a wide range of moisture and sunlight requirements, growers should narrow down a potential plant list first by zone, and then by specific growing climates.",
+    "vegetables": [
+      "Bolt resistant lettuce varieties",
+      "Cantaloupe",
+      "Field peas",
+      "Hot peppers",
+      "Okra",
+      "Tomatoes",
+      "Watermelon"
+    ],
+    "fruit_trees": [
+      "Abacá banana",
+      "Alma fig",
+      "Anna apple",
+      "Bronze banana",
+      "Bryan apricot",
+      "Clementine tangerine",
+      "Darjeeling banana",
+      "Gala apple",
+      "Jujube varieties",
+      "Kumquat and Limequat varieties",
+      "Marsh grapefruit",
+      "Meyer lemon",
+      "Montmorency cherry",
+      "Multiple varieties of peaches and plums",
+      "Ruby grapefruit",
+      "Washington orange"
+    ],
+    "herbs": [
+      "Bay laurel",
+      "Marjoram",
+      "Mexican oregano",
+      "Rosemary",
+      "Sage"
+    ],
+    "flowers": [
+      "Asiatic lily",
+      "Hardy geranium",
+      "Lantana",
+      "Mexican petunia",
+      "Phlox"
+    ]
+  },
+  "9": {
+    "title": "Planting Zone 9",
+    "description": "Planting Zone 9 is considered a year-round planting zone. Located in California, Arizona, Texas, Florida and along the Gulf of Mexico coast, this zone features warm winters and hot summers. With an average minimum winter temperature of 20 to 30 degrees F, Zone 9 features active gardens throughout the entire year.",
+    "temperature": [
+      "Zone 9 can expect minimum average temperatures of 20 to 30 degrees F",
+      "Zone 9a has a minimum average temperature of 20 to 25 degrees F",
+      "Zone 9b has a minimum average temperature of 25 to 30 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Long, hot summers and mild winter conditions make the heat more of an issue than the cold in this zone. Tropical plants with low water requirements thrive in Zone 9. Because of the extreme heat, spring gardening begins much earlier and fall gardens produce much longer than in other zones.",
+    "vegetables": [
+      "Broccoli",
+      "Brussel sprouts",
+      "Cabbage",
+      "Cauliflower",
+      "Greens",
+      "Spinach"
+    ],
+    "fruit_trees": [
+      "Avocado",
+      "Calamondin",
+      "Giant pumelo",
+      "Hardy kiwi",
+      "Mandarin orange",
+      "Olives",
+      "Passionfruit",
+      "Starfruit",
+      "Trifoliate orange"
+    ],
+    "herbs": [
+      "Basil",
+      "Bay laurel",
+      "Chives",
+      "Coriander",
+      "Lemon thyme",
+      "Marjoram",
+      "Mint"
+    ],
+    "flowers": [
+      "Black-eyed Susan",
+      "Canna",
+      "Dahlia",
+      "Hydrangea",
+      "Rhododendrons",
+      "Wisteria",
+      "Zinnia"
+    ]
+  },
+  "10": {
+    "title": "Planting Zone 10",
+    "description": "Southern inland California, southern Florida and Hawaii are the three small areas where the average minimum winter temperature only falls between 30 to 40 degrees F. The ability of Zone 10 gardeners to avoid freezing temperatures is a huge bonus for winter gardening, but the extreme heat of the summer months limits planting possibilities.",
+    "temperature": [
+      "Zone 10 can expect minimum average temperatures of 30 to 40 degrees F",
+      "Zone 10a has a minimum average temperature of 30 to 35 degrees F",
+      "Zone 10b has a minimum average temperature of 35 to 40 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Tropical plants top the list for what grows well in Zone 10. With few frosts, the high heat and humidity of summer can become a major concern for growers.",
+    "vegetables": [
+      "Bitter melon",
+      "Jicama",
+      "Peanuts",
+      "Malabar spinach",
+      "Tomatillos"
+    ],
+    "fruit_trees": [
+      "Allspice tree",
+      "Apple guava",
+      "Carica papaya",
+      "Dwarf Cavendish banana",
+      "Jackfruit tree",
+      "June plum",
+      "Soursop tree"
+    ],
+    "herbs": [
+      "Curry leaf",
+      "Galangal",
+      "Ginger",
+      "Mexican tarragon",
+      "Miracle fruit"
+    ],
+    "flowers": [
+      "Aeoniums",
+      "Agave",
+      "African lily",
+      "Delta maidenhair fern",
+      "Floss flower",
+      "Geraniums",
+      "Hummingbird mint",
+      "Ornamental onion",
+      "Peruvian lily",
+      "Various aloes"
+    ]
+  },
+  "11": {
+    "title": "Planting Zone 11",
+    "description": "Planting Zone 11 is found in Hawaii, the Florida Keys, Puerto Rico and a few small areas of the Continental United States. This extremely warm zone features mellow winters with an average minimum winter temperature of between 40 to 50 degrees F. Cold hardiness is not a factor in this zone, since it has zero frost days. Instead, growers here must consider the impact heat has on their planting choices.",
+    "temperature": [
+      "Zone 11 can expect minimum average temperatures of 40 to 50 degrees F",
+      "Zone 11a has a minimum average temperature of 40 to 45 degrees F",
+      "Zone 11b has a minimum average temperature of 45 to 50 degrees F",
+      "Each of the two subzones can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Tropical plants are the highlight of Zone 11. With long, hot summers and warm winters, Zone 11 growers need to look for plants that are heat tolerant. Traditionally cold season plants, such as pansies and spinach, will have a limited growing season in the even the coolest part of winter here (which is rarely cold at all). Plants native to the area have the best chance of surviving the heat of summer.",
+    "vegetables": [
+      "Beets",
+      "Cabbage",
+      "Carrots",
+      "Kale",
+      "Radishes",
+      "Sweet Peas",
+      "Swiss chard"
+    ],
+    "fruit_trees": [
+      "Jaboticaba",
+      "Macadamia",
+      "Mango",
+      "Moringa tree",
+      "Natal plum",
+      "Sea grape"
+    ],
+    "herbs": [
+      "Basil",
+      "Chives",
+      "Lemongrass",
+      "Mexican oregano",
+      "Mint",
+      "Thyme"
+    ],
+    "flowers": [
+      "Anemone coronaria",
+      "Begonias",
+      "Bougainvillea",
+      "Drumstick allium",
+      "Kangaroo paw",
+      "Ponytail palm"
+    ]
+  },
+  "12": {
+    "title": "Planting Zone 12",
+    "description": "Planting Zones 12 and 13 are not found in the continental United States, but are located in both Hawaii and Puerto Rico. These two plant hardiness zones are extremely warm, tropical environments that are best suited for plants tolerant of intense heat. With the average minimum winter temperature between 50 and 70 degrees F, Zones 12 and 13, the warmest of all the USDA hardiness zones, feature tropical plants and exotic fruits.",
+    "temperature": [
+      "Zone 12 can expect minimum average temperatures of 50 to 60 degrees F",
+      "Zone 12a has a minimum average temperature of 50 to 55 degrees F",
+      "Zone 12b has a minimum average temperature of 55 to 60 degrees F",
+      "The subzones in both Zones 12 and 13 can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Heat tolerance and maximum germination temperatures become an issue in Zones 12 and 13. Tropical plants are the key to gardening and landscaping in the extreme heat of both these zones. Growers germinate indoors, purchase plants from nurseries and grow many vegetables during the cooler winter months.",
+    "vegetables": [
+      "Bush beans",
+      "Eggplant",
+      "Hot peppers",
+      "Summer squashes",
+      "Tomatoes"
+    ],
+    "fruit_trees": [
+      "African apricot",
+      "African breadfruit",
+      "Ackee",
+      "Alupag",
+      "Amazon tree-grape",
+      "Bacuri cascudo",
+      "Bignay",
+      "Black pepper",
+      "Imbe",
+      "Java Olive",
+      "Tropical almond"
+    ],
+    "herbs": [
+      "Borage",
+      "Cilantro",
+      "Culantro",
+      "Rosemary",
+      "Sage",
+      "Savory"
+    ],
+    "flowers": [
+      "Musaceae",
+      "Strelitziaceae",
+      "Heliconia",
+      "Zingiberaceae",
+      "Costaceae",
+      "Cannaceae",
+      "Marantaceae",
+      "Lowiaceae"
+    ]
+  },
+  "13": {
+    "title": "Planting Zone 13",
+    "description": "Planting Zones 12 and 13 are not found in the continental United States, but are located in both Hawaii and Puerto Rico. These two plant hardiness zones are extremely warm, tropical environments that are best suited for plants tolerant of intense heat. With the average minimum winter temperature between 50 and 70 degrees F, Zones 12 and 13, the warmest of all the USDA hardiness zones, feature tropical plants and exotic fruits.",
+    "temperature": [
+      "Zone 13 can expect minimum average temperatures of 60 to 70 degrees F",
+      "Zone 13a has a minimum average temperature of 60 to 65 degrees F",
+      "Zone 13b has a minimum average temperature of 65 to 70 degrees F",
+      "The subzones in both Zones 12 and 13 can experience harsher temperatures depending on weather conditions."
+    ],
+    "planting": "Heat tolerance and maximum germination temperatures become an issue in Zones 12 and 13. Tropical plants are the key to gardening and landscaping in the extreme heat of both these zones. Growers germinate indoors, purchase plants from nurseries and grow many vegetables during the cooler winter months.",
+    "vegetables": [
+      "Bush beans",
+      "Eggplant",
+      "Hot peppers",
+      "Summer squashes",
+      "Tomatoes"
+    ],
+    "fruit_trees": [
+      "African apricot",
+      "African breadfruit",
+      "Ackee",
+      "Alupag",
+      "Amazon tree-grape",
+      "Bacuri cascudo",
+      "Bignay",
+      "Black pepper",
+      "Imbe",
+      "Java Olive",
+      "Tropical almond"
+    ],
+    "herbs": [
+      "Borage",
+      "Cilantro",
+      "Culantro",
+      "Rosemary",
+      "Sage",
+      "Savory"
+    ],
+    "flowers": [
+      "Musaceae",
+      "Strelitziaceae",
+      "Heliconia",
+      "Zingiberaceae",
+      "Costaceae",
+      "Cannaceae",
+      "Marantaceae",
+      "Lowiaceae"
+    ]
+  }
 }

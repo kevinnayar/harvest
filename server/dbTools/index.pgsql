@@ -21,10 +21,13 @@ CREATE TABLE IF NOT EXISTS plants (
 CREATE TABLE IF NOT EXISTS zones (
   id varchar(50) NOT NULL,
   zone varchar(50) NOT NULL,
-  first_frost_day INT NOT NULL,
-  first_frost_month INT NOT NULL,
-  last_frost_day INT NOT NULL,
-  last_frost_month INT NOT NULL
+  title varchar(50) NOT NULL,
+  description TEXT,
+  planting TEXT,
+  temperature TEXT[],
+  vegetables TEXT[],
+  fruit_trees TEXT[],
+  herbs TEXT[]
 );
 
 CREATE TABLE IF NOT EXISTS zones_zipcodes (

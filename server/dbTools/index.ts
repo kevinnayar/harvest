@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs-extra';
 import { Client } from 'pg';
-import { getMonthToIndex } from '../../utils/stringUtils';
 
 async function dbDropTablesAll(pgClient: Client, rebuildZipcodes: boolean): Promise<void> {
   try {
@@ -72,26 +71,64 @@ async function dbBuildTablePlants(pgClient: Client, now: string): Promise<void> 
   }
 }
 
+type TypeParsedZone = {
+  title: string,
+  description: string,
+  temperature: string[],
+  planting: string,
+  vegetables: string[],
+  fruit_trees: string[],
+  herbs: string[],
+};
+
+function quotedStringArray(value: string): string {
+  return `'${value}'`;
+}
+
 async function dbBuildTableZones(pgClient: Client): Promise<void> {
   try {
-    const file = await fs.readFile('./data/dates.json', { encoding: 'UTF-8' });
+    const file = await fs.readFile('./data/zones.json', { encoding: 'UTF-8' });
     const json = JSON.parse(file);
-    const { dates } = json;
 
-    for (const date of dates) {
-      const first = date.firstFrostDate.split(' ');
-      const firstFrostDay = first[1];
-      const firstFrostMonth = getMonthToIndex(first[0]);
-
-      const last = date.lastFrostDate.split(' ');
-      const lastFrostDay = last[1];
-      const lastFrostMonth = getMonthToIndex(last[0]);
+    for (let [id, value] of Object.entries(json)) {
+      // @ts-ignore
+      const data: TypeParsedZone = value;
+      const {
+        title,
+        description,
+        planting,
+        temperature,
+        vegetables,
+        fruit_trees: fruitTrees,
+        herbs,
+      } = data;
 
       const query = `
         INSERT INTO 
-          zones (id, zone, first_frost_day, first_frost_month, last_frost_day, last_frost_month)
+          zones (id, zone, title, description, planting, temperature, vegetables, fruit_trees, herbs)
         VALUES
-          ('zone_${date.zone}', '${date.zone}', '${firstFrostDay}', '${firstFrostMonth}', '${lastFrostDay}', '${lastFrostMonth}')
+          (
+            'zone_${id}a',
+            '${id}a',
+            '${title}a',
+            '${description}',
+            '${planting}',
+            ARRAY[${temperature.map(quotedStringArray)}],
+            ARRAY[${vegetables.map(quotedStringArray)}],
+            ARRAY[${fruitTrees.map(quotedStringArray)}],
+            ARRAY[${herbs.map(quotedStringArray)}]
+          ),
+          (
+            'zone_${id}b',
+            '${id}b',
+            '${title}b',
+            '${description}',
+            '${planting}',
+            ARRAY[${temperature.map(quotedStringArray)}],
+            ARRAY[${vegetables.map(quotedStringArray)}],
+            ARRAY[${fruitTrees.map(quotedStringArray)}],
+            ARRAY[${herbs.map(quotedStringArray)}]
+          )
         ;
       `;
       await pgClient.query(query);
@@ -117,7 +154,6 @@ async function dbBuildTableZonesZipcodes(pgClient: Client): Promise<void> {
         ('zipcode_${item.zipcode}', '${item.zipcode}', '${item.zone}', '${item.tRange}')
       ;
     `;
-      console.log(query);
       await pgClient.query(query);
     }
   } catch (err) {
@@ -136,7 +172,6 @@ async function main(_rebuildZipcodes?: string): Promise<void> {
     await pgClient.connect();
 
     await dbDropTablesAll(pgClient, rebuildZipcodes);
-
     await dbCreateTablesAll(pgClient);
 
     await dbBuildTableUsers(pgClient, now);

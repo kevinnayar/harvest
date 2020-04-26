@@ -1,11 +1,30 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth/useAuth';
+import { CognitoUserSession, CognitoAccessToken } from 'amazon-cognito-identity-js';
+import config from '../../config';
+
+async function testApi(session: CognitoUserSession) {
+  const accessToken: CognitoAccessToken = session.getAccessToken();
+  const jwtToken: string = accessToken.getJwtToken();
+  const userId: string = accessToken.payload.username;
+  console.log({jwtToken, userId});
+
+  await fetch(`${config.apiUrl}/api/users/${userId}`, {
+    method: 'post',
+    headers: new Headers({
+      Authorization: `Bearer ${jwtToken}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    }),
+  });
+
+  return undefined;
+}
 
 const Home = () => {
-  const { isAuthenticated, onLogout, userState } = useAuth();
+  const { onLogout, userState } = useAuth();
 
-  if (!isAuthenticated) return <Redirect to="/auth" />;
+  if (!userState.authenticated) return <Redirect to="/auth" />;
 
   return (
     <div>
@@ -15,7 +34,8 @@ const Home = () => {
         <li>User: {userState.userGuid}</li>
         <li>Email: {userState.email}</li>
       </ul>
-      <button onClick={onLogout}>Logout</button>
+      <button type="button" onClick={onLogout}>Logout</button>
+      <button type="button" onClick={(_e) => testApi(userState.cognitoSession)}>Test API</button>
     </div>
   );
 };

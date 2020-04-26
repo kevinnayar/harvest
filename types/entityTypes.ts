@@ -27,10 +27,13 @@ export type TypeEntityZone = {
   zipcode: string;
   zone: string;
   tRange: string;
-  firstFrostDay: number;
-  firstFrostMonth: number;
-  lastFrostDay: number;
-  lastFrostMonth: number;
+  title: string;
+  description: string;
+  planting: string;
+  temperature: string[];
+  vegetables: string[];
+  fruitTrees: string[];
+  herbs: string[];
 };
 
 export type TypeEntity = TypeEntityUser | TypeEntityPlant | TypeEntityZone;

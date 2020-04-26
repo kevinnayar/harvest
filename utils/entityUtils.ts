@@ -2,11 +2,9 @@ import {
   TypeEntityUser,
   TypeEntityPlant,
   TypeEntityZone,
-  TypeEntityType,
-  TypeEntity,
 } from '../types/entityTypes';
 
-function convertSqlToEntityUser(entity: any): TypeEntityUser {
+export function convertSqlToEntityUser(entity: any): TypeEntityUser {
   const { id, status } = entity;
   return {
     type: 'TypeEntityUser',
@@ -18,7 +16,7 @@ function convertSqlToEntityUser(entity: any): TypeEntityUser {
   };
 }
 
-function convertSqlToEntityPlant(entity: any): TypeEntityPlant {
+export function convertSqlToEntityPlant(entity: any): TypeEntityPlant {
   const { id, category, status } = entity;
   return {
     type: 'TypeEntityPlant',
@@ -33,30 +31,20 @@ function convertSqlToEntityPlant(entity: any): TypeEntityPlant {
   };
 }
 
-function convertSqlToEntityZone(entity: any): TypeEntityZone {
-  const { id, zipcode, zone } = entity;
+export function convertSqlToEntityZone(entity: any): TypeEntityZone {
+  const { id, zipcode, zone, title, description, planting, temperature, vegetables, herbs } = entity;
   return {
     type: 'TypeEntityZone',
     id,
     zipcode,
     zone,
     tRange: entity.t_range,
-    firstFrostDay: entity.first_frost_day,
-    firstFrostMonth: entity.first_frost_month,
-    lastFrostDay: entity.last_frost_day,
-    lastFrostMonth: entity.last_frost_month,
+    title,
+    description,
+    planting,
+    temperature,
+    vegetables,
+    fruitTrees: entity.fruit_trees,
+    herbs,
   };
-}
-
-export function convertSqlToEntity(entityType: TypeEntityType, entity: any): TypeEntity {
-  switch (entityType) {
-    case 'TypeEntityUser':
-      return convertSqlToEntityUser(entity);
-    case 'TypeEntityPlant':
-      return convertSqlToEntityPlant(entity);
-    case 'TypeEntityZone':
-      return convertSqlToEntityZone(entity);
-    default:
-      throw new Error(`convertSqlToEntity: unexpected entity type: ${entityType}`);
-  }
 }

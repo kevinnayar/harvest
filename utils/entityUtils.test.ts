@@ -1,9 +1,13 @@
-import { convertSqlToEntity } from './entityUtils';
+import { 
+  convertSqlToEntityUser,
+  convertSqlToEntityPlant,
+  convertSqlToEntityZone,
+ } from './entityUtils';
 
 describe('entityUtils.test.ts', () => {
   test('convertSqlToEntity', () => {
     expect(
-      convertSqlToEntity('TypeEntityUser', {
+      convertSqlToEntityUser({
         type: 'TypeEntityUser',
         id: 'a',
         user_name: 'b',
@@ -20,7 +24,7 @@ describe('entityUtils.test.ts', () => {
       imageUrl: 'c',
     });
     expect(
-      convertSqlToEntity('TypeEntityPlant', {
+      convertSqlToEntityPlant({
         type: 'TypeEntityPlant',
         id: 'a',
         user_id: 'b',
@@ -44,16 +48,19 @@ describe('entityUtils.test.ts', () => {
     });
   });
   expect(
-    convertSqlToEntity('TypeEntityZone', {
+    convertSqlToEntityZone({
       type: 'TypeEntityZone',
       id: 'a',
       zone: 'b',
       zipcode: 'c',
       t_range: 'd',
-      first_frost_day: 1,
-      first_frost_month: 2,
-      last_frost_day: 3,
-      last_frost_month: 4,
+      title: 's',
+      description: 's',
+      planting: 's',
+      temperature: ['a', 'b'],
+      vegetables: ['a', 'b'],
+      fruit_trees: ['a', 'b'],
+      herbs: ['a', 'b'],
     }),
   ).toEqual({
     type: 'TypeEntityZone',
@@ -61,9 +68,12 @@ describe('entityUtils.test.ts', () => {
     zone: 'b',
     zipcode: 'c',
     tRange: 'd',
-    firstFrostDay: 1,
-    firstFrostMonth: 2,
-    lastFrostDay: 3,
-    lastFrostMonth: 4,
+    title: 's',
+    description: 's',
+    planting: 's',
+    temperature: ['a', 'b'],
+    vegetables: ['a', 'b'],
+    fruitTrees: ['a', 'b'],
+    herbs: ['a', 'b'],
   });
 });

@@ -1,4 +1,4 @@
-type TypeStatus = 'enabled' | 'disabled';
+export type TypeStatus = 'enabled' | 'disabled';
 
 export type TypeEntityUser = {
   type: 'TypeEntityUser';

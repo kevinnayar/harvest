@@ -1,6 +1,6 @@
 import Amplify from '@aws-amplify/core';
 import Auth from '@aws-amplify/auth';
-import { ISignUpResult, CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
+import { ISignUpResult, CognitoUser } from 'amazon-cognito-identity-js';
 import {
   TypeUserState,
   TypeUserCredentials,
@@ -37,6 +37,7 @@ import {
   TypeUserForgotPasswordSubmitDispatch,
 } from '../../../types/userTypes';
 import config from '../../config';
+import { apiResponseHandler } from '../../../utils/apiUtils';
 
 Amplify.configure({
   Auth: {
@@ -131,22 +132,46 @@ export function userAuthSignup(userSignupInfo: TypeUserSignupInfo) {
     });
 
     try {
-      const signupResult: ISignUpResult = await Auth.signUp({
-        username: userSignupInfo.email,
-        password: userSignupInfo.password,
-        attributes: {
-          given_name: userSignupInfo.firstName,
-          family_name: userSignupInfo.lastName,
-        },
-      }).then(data => data);
-      const payload: TypeUserState = {
-        userGuid: signupResult.userSub,
-        email: null,
-        authenticated: false,
-        confirmed: signupResult.userConfirmed,
-        cognitoSession: null,
-      };
-      
+      // const signupResult: ISignUpResult = await Auth.signUp({
+      //   username: userSignupInfo.email,
+      //   password: userSignupInfo.password,
+      //   attributes: {
+      //     given_name: userSignupInfo.firstName,
+      //     family_name: userSignupInfo.lastName,
+      //   },
+      // }).then(data => data);
+      // const payload: TypeUserState = {
+      //   userGuid: signupResult.userSub,
+      //   email: null,
+      //   authenticated: false,
+      //   confirmed: signupResult.userConfirmed,
+      //   cognitoSession: null,
+      // };
+
+      // await fetch(`${config.apiUrl}/api/users/${userId}`, {
+      //   method: 'post',
+      //   headers: new Headers({
+      //     Authorization: `Bearer ${jwtToken}`,
+      //     'Content-Type': 'application/x-www-form-urlencoded',
+      //   }),
+      // });
+      const payload: TypeUserState = await fetch(`${config.apiUrl}/api/users/create`, {
+        method: 'post',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(userSignupInfo),
+      })
+        .then((res) => res.json())
+        .then(apiResponseHandler)
+        .then((response) => {
+          const userState: TypeUserState = { ...response };
+          return userState;
+        })
+        .catch((error) => {
+          throw error;
+        });
+
       dispatch({
         type: USER_AUTH_SIGNUP_SUCCEEDED,
         payload,

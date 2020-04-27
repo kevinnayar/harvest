@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as cors from 'cors';
+import * as bodyParser from 'body-parser';
 import * as api from './api/api';
 
 import { apiFormatError, strictStringOrThrow, numberOrThrow } from '../utils/apiUtils';
@@ -41,6 +42,9 @@ function main() {
     };
 
     app.use(cors(corsOptions));
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+    app.use(bodyParser.raw());
 
     const dbConfig = validDBConfig();
 

@@ -1,5 +1,6 @@
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { TypeBaseDispatch, TypeApiXferStatus } from './baseTypes';
+import { TypeStatus } from './entityTypes';
 
 export const USER_AUTH_CHECK_REQUESTED = 'USER_AUTH_CHECK_REQUESTED';
 export const USER_AUTH_CHECK_SUCCEEDED = 'USER_AUTH_CHECK_SUCCEEDED';
@@ -136,5 +137,16 @@ export type TypeUserReducer = {
   userState: TypeUserState;
 };
 
+export type TypeUserRole = 'superAdmin' | 'admin' | 'premium' | 'basic';
 
+export type TypeUser = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  status: TypeStatus,
+  role: TypeUserRole,
+  email: string;
+  confirmed: boolean,
+  dateCreated: string;
+}
 

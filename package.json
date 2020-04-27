@@ -51,6 +51,7 @@
     "aws-amplify": "^3.0.9",
     "aws-sdk": "^2.663.0",
     "baseui": "^9.72.0",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

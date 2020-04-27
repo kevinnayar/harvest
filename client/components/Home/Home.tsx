@@ -8,7 +8,6 @@ async function testApi(session: CognitoUserSession) {
   const accessToken: CognitoAccessToken = session.getAccessToken();
   const jwtToken: string = accessToken.getJwtToken();
   const userId: string = accessToken.payload.username;
-  console.log({jwtToken, userId});
 
   await fetch(`${config.apiUrl}/api/users/${userId}`, {
     method: 'post',

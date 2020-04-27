@@ -155,6 +155,7 @@ export function userAuthSignup(userSignupInfo: TypeUserSignupInfo) {
       //     'Content-Type': 'application/x-www-form-urlencoded',
       //   }),
       // });
+
       const payload: TypeUserState = await fetch(`${config.apiUrl}/api/users/create`, {
         method: 'post',
         headers: new Headers({

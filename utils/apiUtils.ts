@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { TypeApiXferStatus } from '../types/baseTypes';
 
 export function apiXferInit(): TypeApiXferStatus {
@@ -71,3 +72,17 @@ export function trueOrThrow(value: any,  message: string): boolean {
   if (typeof value === 'boolean' && value === true) return value;
   throw new Error(message);
 }
+
+type TypeGuid = 'user' | 'plant';
+
+export function getGuid(type?: TypeGuid): string {
+  switch (type) {
+    case 'user': return `user_${uuid()}`;
+    case 'plant': return `plant_${uuid()}`;
+    case undefined: return `${uuid()}`;
+    default: throw new Error(`Unexpected: getGuid() could not for unknown type: ${type}`);
+  }
+}
+
+
+

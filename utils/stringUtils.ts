@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { TypeMonth } from '../types/baseTypes';
 
 export function getMonthToIndex(month: TypeMonth): number {
@@ -38,3 +39,13 @@ export function getIndexToMonth(index: number, abbreviated?: boolean): string {
   return abbreviated ? month.substring(0, 3) : month;
 }
 
+type TypeGuid = 'user' | 'plant';
+
+export function getGuid(type?: TypeGuid): string {
+  switch (type) {
+    case 'user': return `user_${uuid()}`;
+    case 'plant': return `plant_${uuid()}`;
+    case undefined: return `${uuid()}`;
+    default: throw new Error(`Unexpected: getGuid() could not for unknown type: ${type}`);
+  }
+}

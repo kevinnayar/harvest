@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import { IDatabase } from 'pg-promise';
 
 import { dbCreateNewPlant } from './plantDb';
-import { apiFormatError, strictStringOrThrow, getGuid } from '../../../../utils/apiUtils';
+import { apiFormatError, strictStringOrThrow } from '../../../../utils/apiUtils';
+import { getGuid } from '../../../../utils/stringUtils';
 import { BadRequestException } from '../../../../utils/exceptionUtils';
 import { TypePlant } from '../../../../types/plantTypes';
 

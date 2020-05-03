@@ -71,3 +71,5 @@ export function trueOrThrow(value: any,  message: string): boolean {
   if (typeof value === 'boolean' && value === true) return value;
   throw new Error(message);
 }
+
+

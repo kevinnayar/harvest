@@ -41,10 +41,9 @@ async function dbCreateTablesAll(pgClient: Client): Promise<void> {
 async function dbBuildTableUsers(pgClient: Client, now: string): Promise<void> {
   try {
     const query = `
-      INSERT INTO users (id, user_name, status, date_created)
+      INSERT INTO users (id, first_name, last_name, status, role, email, confirmed, date_created)
       VALUES
-        ('user_1', 'John Doe', 'enabled', ${now}),
-        ('user_2', 'Jane Doe', 'enabled', ${now})
+        ('58f81c7d-ef38-4cce-8761-f699629cf37a', 'Kay', 'Nay', 'enabled', 'superAdmin', 'kevin.nayar+1@gmail.com', true, ${now})
       ;
     `;
     await pgClient.query(query);

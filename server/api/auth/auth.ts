@@ -4,6 +4,8 @@ import { Request, Response } from 'express';
 import { IDatabase } from 'pg-promise';
 
 import config from '../../../client/config';
+
+import { dbGetUserById } from '../entities/user/userDb';
 import { apiFormatError, strictStringOrThrow, trueOrThrow } from '../../../utils/apiUtils';
 import { UnauthorizedException } from '../../../utils/exceptionUtils';
 
@@ -42,7 +44,7 @@ export default function (db: IDatabase<{}, any>) {
     try {
       const token = strictStringOrThrow(
         req.headers.authorization,
-        'Authorization header is invalid or non-existent.',
+        'Authorization header is invalid or missing.',
       );
       const jwtToken = strictStringOrThrow(
         token.replace('Bearer ', ''),
@@ -57,6 +59,10 @@ export default function (db: IDatabase<{}, any>) {
 
       trueOrThrow(!isTokenExpired(payload.exp), 'Token is expired.');
       trueOrThrow(payload.iss === keysUrlPrefix, 'Token issuer does not match client.');
+
+      const users = await dbGetUserById(db, payload.username);
+      console.log({ user: users[0], guid: payload.username });
+      if (users.length !== 1) return res.status(401).json(UnauthorizedException('Could not authenticate user.'));
       next();
     } catch (err) {
       return res.status(401).json(UnauthorizedException(apiFormatError(err)));

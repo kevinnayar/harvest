@@ -1,8 +1,12 @@
 -- Creates tables
 CREATE TABLE IF NOT EXISTS users (
   id varchar(50) NOT NULL,
-  user_name varchar(50) NOT NULL,
-  status varchar(50) NOT NULL,
+  first_name TEXT,
+  last_name TEXT,
+  status TEXT,
+  role TEXT,
+  email TEXT,
+  confirmed BOOLEAN,
   image_url TEXT,
   date_created TIMESTAMP NOT NULL
 );

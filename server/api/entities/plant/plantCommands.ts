@@ -2,26 +2,35 @@ import { Request, Response } from 'express';
 import { IDatabase } from 'pg-promise';
 
 import { dbCreateNewPlant } from './plantDb';
-import { apiFormatError, strictStringOrThrow } from '../../../../utils/apiUtils';
+import { apiFormatError, strictStringOrThrow, stringUndefinedOrThrow } from '../../../../utils/apiUtils';
 import { getGuid } from '../../../../utils/stringUtils';
 import { BadRequestException } from '../../../../utils/exceptionUtils';
-import { TypePlant } from '../../../../types/plantTypes';
+import { timeGetNowToUtc } from '../../../../utils/numberUtils';
+import { TypeEntityPlant } from '../../../../types/entityTypes';
 
 export default function (db: IDatabase<{}, any>) {
   async function createNewPlant(req: Request<{ userId: string }>, res: Response) {
     try {
       const userId = strictStringOrThrow(req.params.userId, 'User ID is required and cannot be empty.');
       const plantName = strictStringOrThrow(req.body.plantName, 'Plant name is required and cannot be empty.');
-      const plantCategory = strictStringOrThrow(req.body.plantCategory, 'Plant category is required and cannot be empty.');
-      const datePlanted = strictStringOrThrow(req.body.datePlanted, 'Date planted is required and cannot be empty.');
-      const newPlant: TypePlant = {
-        plantId: getGuid('plant'),
-        plantName,
-        plantCategory,
+      const plantCategory = strictStringOrThrow(
+        req.body.plantCategory,
+        'Plant category is required and cannot be empty.',
+      );
+      const datePlantedMaybe = stringUndefinedOrThrow(
+        req.body.datePlanted,
+        'Optional value for date planted must be a string.',
+      );
+
+      const newPlant: TypeEntityPlant = {
+        type: 'TypeEntityPlant',
+        id: getGuid('plant'),
         userId,
+        plantName,
+        category: plantCategory,
         status: 'enabled',
-        datePlanted,
-        dateCreated: `${Date.now() / 1000}`,
+        dateCreated: timeGetNowToUtc(),
+        datePlanted: datePlantedMaybe ? parseInt(datePlantedMaybe, 10) : undefined,
       };
 
       const plantCreated = await dbCreateNewPlant(db, newPlant);

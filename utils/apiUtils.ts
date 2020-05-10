@@ -40,14 +40,33 @@ export function apiFormatError(error: string | { message: string }): string {
   return typeof error === 'object' && 'message' in error ? error.message.toString() : error;
 }
 
-export function apiResponseHandler(response: any) {
-  if ('status' in response && response.status !== 200) {
+export function apiResponseHandler(res: any) {
+  const response = res.json();
+  if ('status' in response && typeof response.status === 'number' && response.status !== 200) {
     throw apiFormatError(response);
   }
   return response;
 }
 
+export async function apiAuthenticatedPost(jwtToken: string, url: string, body: BodyInit) {
+  const response = await fetch(url, {
+    method: 'post',
+    headers: new Headers({
+      Authorization: `Bearer ${jwtToken}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    }),
+    body,
+  });
+  return response;
+}
+
 export function stringOrThrow(value: any, message: string): string {
+  if (typeof value === 'string') return value;
+  throw new Error(message);
+}
+
+export function stringUndefinedOrThrow(value: any, message: string): void | string {
+  if (value === undefined) return value;
   if (typeof value === 'string') return value;
   throw new Error(message);
 }

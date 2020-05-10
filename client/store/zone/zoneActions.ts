@@ -16,7 +16,6 @@ export function getZone(zipcode: string) {
 
     try {
       const payload: TypeEntityZone = await fetch(`${config.apiUrl}/api/zones/${zipcode}`)
-        .then((res) => res.json())
         .then(apiResponseHandler)
         .then((response) => {
           const zoneState: TypeEntityZone = { ...response };

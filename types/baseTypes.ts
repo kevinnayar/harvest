@@ -1,3 +1,4 @@
+import { TypePlantReducer, TypePlantDispatch } from './plantTypes';
 import { TypeUserReducer, TypeUserDispatch } from './userTypes';
 import { TypeZoneReducer, TypeZoneDispatch } from './zoneTypes';
 
@@ -14,11 +15,12 @@ export type TypeBaseDispatch = {
 };
 
 export type TypeAppReducer = {
+  plant: TypePlantReducer;
   user: TypeUserReducer;
   zone: TypeZoneReducer;
 };
 
-export type TypeAppDispatch = TypeUserDispatch | TypeZoneDispatch;
+export type TypeAppDispatch = TypePlantDispatch | TypeUserDispatch | TypeZoneDispatch;
 
 export type TypeDBConfig = {
   database: string;

@@ -163,7 +163,6 @@ export function userAuthSignup(userSignupInfo: TypeUserSignupInfo) {
         }),
         body: JSON.stringify(userSignupInfo),
       })
-        .then((res) => res.json())
         .then(apiResponseHandler)
         .then((response) => {
           const userState: TypeUserState = { ...response };

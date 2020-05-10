@@ -61,7 +61,6 @@ export default function (db: IDatabase<{}, any>) {
       trueOrThrow(payload.iss === keysUrlPrefix, 'Token issuer does not match client.');
 
       const users = await dbGetUserById(db, payload.username);
-      console.log({ user: users[0], guid: payload.username });
       if (users.length !== 1) return res.status(401).json(UnauthorizedException('Could not authenticate user.'));
       next();
     } catch (err) {
